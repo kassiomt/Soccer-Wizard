@@ -38,7 +38,7 @@ public class SoccerWizard {
 	}
 	
 	public static Initializer initializeDataToApplyTrainedNet(){
-		return dataForApplication = new Initializer(trainingParameters.getNumTimes(), trainingParameters.getNumRodadas(), teamsMapBuilt.getTeamsMap());
+		return dataForApplication = new Initializer(trainingParameters.getNumTimesForApplication(), trainingParameters.getNumRodadasForApplication(), teamsMapBuilt.getTeamsMap());
 	}
 	
 	public static BackPropagationAlgorithm backPropagationAlgorithm() {
@@ -50,7 +50,7 @@ public class SoccerWizard {
 	}
 	
 	public static FeedforwardAlgorithm feedforwardAlgorithm() {
-		return new FeedforwardAlgorithm(dataForApplication, bias);
+		return new FeedforwardAlgorithm(dataForApplication, bias, trainingParameters.getConfidenceInterval());
 	}
 	
 	public static TeamsMapBuilder buildTeams(Workbook workbook){

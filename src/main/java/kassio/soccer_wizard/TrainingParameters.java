@@ -8,6 +8,9 @@ public class TrainingParameters {
 	private int numRodadas;
 	private int numTimes;
 	private int hiddenNeurons;
+	private int numRodadasForApplication;
+	private int numTimesForApplication;
+	private double confidenceInterval;
 	
 	public double getLearningRate() {
 		return learningRate;
@@ -44,5 +47,23 @@ public class TrainingParameters {
 	}
 	public void setHiddenNeurons(int hiddenNeurons) {
 		this.hiddenNeurons = hiddenNeurons;
+	}
+	public int getNumTimesForApplication() {
+		return numTimesForApplication;
+	}
+	public void setNumTimesForApplication(int numTimesForApplication) {
+		this.numTimesForApplication = numTimesForApplication;
+	}
+	public int getNumRodadasForApplication() {
+		return numRodadasForApplication;
+	}
+	public void setNumRodadasForApplication(int numRodadasForApplication) {
+		this.numRodadasForApplication = numRodadasForApplication;
+	}
+	public double getConfidenceInterval() {
+		return confidenceInterval;
+	}
+	public void setConfidenceInterval(double confidenceInterval) {
+		this.confidenceInterval = confidenceInterval;
 	}	
 }
