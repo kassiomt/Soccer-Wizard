@@ -74,15 +74,13 @@ public class Initializer {
 					int offset = colunasSelecionaveis.length;
 					for (int k = offset; k < offset*2; k++) {
 						Cell dadosAdversario = mapaDeTimes.get("time" + adversario.getContents()).getCell(colunasSelecionaveis[k-offset], i);
-						inputMatrix[k+1][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = Double.parseDouble(dadosAdversario.getContents().replace(',', '.'));
+						inputMatrix[k+1][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = (-1) * Double.parseDouble(dadosAdversario.getContents().replace(',', '.'));
 					}
 				}
 		}
 	}
 	
-	private void setTargetMatrixWithEnemyTeamDataAndOffset(int numTimes,
-			int numRodadas, Map<String, Sheet> mapaDeTimes,
-			int[] resultsDataColumns) {
+	private void setTargetMatrixWithEnemyTeamDataAndOffset(int numTimes, int numRodadas, Map<String, Sheet> mapaDeTimes, int[] resultsDataColumns) {
 		targetMatrix = new double[resultsDataColumns.length][numRodadas*numTimes];	
 		for (int j = (18-numTimes); j < 18; j++) {
 			for (int i = (31-numRodadas); i < 31; i++) {
@@ -135,7 +133,7 @@ public class Initializer {
 		int offset = colunasSelecionaveis.length;
 		for (int k = offset; k < offset*2; k++) {
 			Cell dadosAdversario = mapaDeTimes.get("time" + adversario.getContents()).getCell(colunasSelecionaveis[k-offset], i);
-			inputMatrix[k+1][numRodadas*j + i-2] = Double.parseDouble(dadosAdversario.getContents().replace(',', '.'));
+			inputMatrix[k+1][numRodadas*j + i-2] = (-1) * Double.parseDouble(dadosAdversario.getContents().replace(',', '.'));
 		}
 	}
 	

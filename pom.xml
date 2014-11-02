@@ -33,10 +33,5 @@
       <artifactId>jfreechart</artifactId>
       <version>1.0.0</version>
     </dependency>
-    <dependency>
-      <groupId>org.jdesktop</groupId>
-      <artifactId>beansbinding</artifactId>
-      <version>1.2.1</version>
-    </dependency>
   </dependencies>
 </project>
