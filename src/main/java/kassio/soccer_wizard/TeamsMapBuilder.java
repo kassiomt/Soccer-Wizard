@@ -32,24 +32,46 @@ public class TeamsMapBuilder {
 //		teamsMap.put("time19", workbook.getSheet("SaoPaulo"));
 //		teamsMap.put("time20", workbook.getSheet("Vasco"));
 		
-		teamsMap.put("time1", workbook.getSheet("AC Milan"));
-		teamsMap.put("time2", workbook.getSheet("Atalanta"));
-		teamsMap.put("time3", workbook.getSheet("Bologna"));
-		teamsMap.put("time4", workbook.getSheet("Brescia"));
-		teamsMap.put("time5", workbook.getSheet("Chievo"));
-		teamsMap.put("time6", workbook.getSheet("Fiorentina"));
-		teamsMap.put("time7", workbook.getSheet("Inter"));
-		teamsMap.put("time8", workbook.getSheet("Juventus"));
-		teamsMap.put("time9", workbook.getSheet("Lazio"));
-		teamsMap.put("time10", workbook.getSheet("Lecce"));
-		teamsMap.put("time11", workbook.getSheet("Parma"));
-		teamsMap.put("time12", workbook.getSheet("Perugia"));
-		teamsMap.put("time13", workbook.getSheet("Piacenza"));
-		teamsMap.put("time14", workbook.getSheet("Roma"));
-		teamsMap.put("time15", workbook.getSheet("Torino"));
-		teamsMap.put("time16", workbook.getSheet("Udinese"));
-		teamsMap.put("time17", workbook.getSheet("Venezia"));
-		teamsMap.put("time18", workbook.getSheet("Verona"));
+//		teamsMap.put("time1", workbook.getSheet("AC Milan"));
+//		teamsMap.put("time2", workbook.getSheet("Atalanta"));
+//		teamsMap.put("time3", workbook.getSheet("Bologna"));
+//		teamsMap.put("time4", workbook.getSheet("Brescia"));
+//		teamsMap.put("time5", workbook.getSheet("Chievo"));
+//		teamsMap.put("time6", workbook.getSheet("Fiorentina"));
+//		teamsMap.put("time7", workbook.getSheet("Inter"));
+//		teamsMap.put("time8", workbook.getSheet("Juventus"));
+//		teamsMap.put("time9", workbook.getSheet("Lazio"));
+//		teamsMap.put("time10", workbook.getSheet("Lecce"));
+//		teamsMap.put("time11", workbook.getSheet("Parma"));
+//		teamsMap.put("time12", workbook.getSheet("Perugia"));
+//		teamsMap.put("time13", workbook.getSheet("Piacenza"));
+//		teamsMap.put("time14", workbook.getSheet("Roma"));
+//		teamsMap.put("time15", workbook.getSheet("Torino"));
+//		teamsMap.put("time16", workbook.getSheet("Udinese"));
+//		teamsMap.put("time17", workbook.getSheet("Venezia"));
+//		teamsMap.put("time18", workbook.getSheet("Verona"));
+		
+		teamsMap.put("time1", workbook.getSheet("Time 1"));
+		teamsMap.put("time2", workbook.getSheet("Time 2"));
+		teamsMap.put("time3", workbook.getSheet("Time 3"));
+		teamsMap.put("time4", workbook.getSheet("Time 4"));
+		teamsMap.put("time5", workbook.getSheet("Time 5"));
+		teamsMap.put("time6", workbook.getSheet("Time 6"));
+		teamsMap.put("time7", workbook.getSheet("Time 7"));
+		teamsMap.put("time8", workbook.getSheet("Time 8"));
+		teamsMap.put("time9", workbook.getSheet("Time 9"));
+		teamsMap.put("time10", workbook.getSheet("Time 10"));
+		teamsMap.put("time11", workbook.getSheet("Time 11"));
+		teamsMap.put("time12", workbook.getSheet("Time 12"));
+		teamsMap.put("time13", workbook.getSheet("Time 13"));
+		teamsMap.put("time14", workbook.getSheet("Time 14"));
+		teamsMap.put("time15", workbook.getSheet("Time 15"));
+		teamsMap.put("time16", workbook.getSheet("Time 16"));
+		teamsMap.put("time17", workbook.getSheet("Time 17"));
+		teamsMap.put("time18", workbook.getSheet("Time 18"));
+		teamsMap.put("time19", workbook.getSheet("Time 19"));
+		teamsMap.put("time20", workbook.getSheet("Time 20"));
+
 	}
 
 	public HashMap<String, Sheet> getTeamsMap() {

@@ -32,22 +32,24 @@ public class Initializer {
 		targetMatrix[0][3] = -1;
 	}
 
-	public Initializer(int numTimes, int numRodadas, Map<String, Sheet> mapaDeTimes, int hiddenNeurons){
+	public Initializer(int timeInicial, int timeFinal, int rodadaInicial, int rodadaFinal, int hiddenNeurons, Map<String, Sheet> mapaDeTimes){
 
 		int[] colunasSelecionaveis = useThisColumnsOfExcelTable();
 		int enemyDataColumn = enemyDataColumn(); 
 		int[] resultsDataColumns = resultsDataColumns();
 		
-		setInputMatrixWithEnemyTeamData(numTimes, numRodadas, mapaDeTimes, colunasSelecionaveis,enemyDataColumn);
+		setInputMatrixWithEnemyTeamDataAndRange(timeInicial, timeFinal, rodadaInicial, rodadaFinal, mapaDeTimes, colunasSelecionaveis, enemyDataColumn);
 
 		setHiddenNeurons(new double[hiddenNeurons]);
+		int numRodadas = 1 + (rodadaFinal - rodadaInicial);
+		int numTimes = 1 + (timeFinal - timeInicial);
 		setOutputMatrix(new double[resultsDataColumns.length][numRodadas*numTimes]);
 
-		setTargetMatrixWithEnemyTeamData(numTimes, numRodadas, mapaDeTimes, resultsDataColumns, enemyDataColumn);
+		setTargetMatrixWithEnemyTeamDataAndRange(timeInicial, timeFinal, rodadaInicial, rodadaFinal, mapaDeTimes, resultsDataColumns);
 	}
 
 	
-	public Initializer(int numTimes, int numRodadas, Map<String, Sheet> mapaDeTimes){
+	public Initializer(int timeInicial, int timeFinal, int rodadaInicial, int rodadaFinal, Map<String, Sheet> mapaDeTimes){
 
 		int[] colunasSelecionaveis = useThisColumnsOfExcelTable();
 		int enemyDataColumn = enemyDataColumn();
@@ -56,45 +58,74 @@ public class Initializer {
 //		setInputMatrixWithEnemyTeamData(numTimes, numRodadas, mapaDeTimes, colunasSelecionaveis, enemyDataColumn);
 //		setTargetMatrixWithEnemyTeamData(numTimes, numRodadas, mapaDeTimes, resultsDataColumns, enemyDataColumn);
 		
-		setInputMatrixWithEnemyTeamDataAndOffset(numTimes, numRodadas, mapaDeTimes, colunasSelecionaveis, enemyDataColumn);		
-		setTargetMatrixWithEnemyTeamDataAndOffset(numTimes, numRodadas, mapaDeTimes, resultsDataColumns);
+		setInputMatrixWithEnemyTeamDataAndRange(timeInicial, timeFinal, rodadaInicial, rodadaFinal, mapaDeTimes, colunasSelecionaveis, enemyDataColumn);		
+		setTargetMatrixWithEnemyTeamDataAndRange(timeInicial, timeFinal, rodadaInicial, rodadaFinal, mapaDeTimes, resultsDataColumns);
 	}
 
-	private void setInputMatrixWithEnemyTeamDataAndOffset(int numTimes,	int numRodadas, Map<String, Sheet> mapaDeTimes,
-			int[] colunasSelecionaveis, int enemyDataColumn) {
-			inputMatrix = new double[colunasSelecionaveis.length*2+1][numRodadas*numTimes];
-			for (int j = (18-numTimes); j < 18; j++) {
-				for (int i = (31-numRodadas); i < 31; i++) {
-					inputMatrix[0][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = 1;
-					for (int k = 0; k < colunasSelecionaveis.length; k++) {
-						Cell dados = mapaDeTimes.get("time" + (j+1)).getCell(colunasSelecionaveis[k], i);
-						inputMatrix[k+1][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = Double.parseDouble(dados.getContents().replace(',', '.'));
-					}
-					Cell adversario = mapaDeTimes.get("time" + (j+1)).getCell(enemyDataColumn, i);
-					int offset = colunasSelecionaveis.length;
-					for (int k = offset; k < offset*2; k++) {
-						Cell dadosAdversario = mapaDeTimes.get("time" + adversario.getContents()).getCell(colunasSelecionaveis[k-offset], i);
-						inputMatrix[k+1][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = (-1) * Double.parseDouble(dadosAdversario.getContents().replace(',', '.'));
-					}
+	private void setInputMatrixWithEnemyTeamDataAndRange(int timeInicial, int timeFinal, int rodadaInicial, int rodadaFinal, Map<String, Sheet> mapaDeTimes,	int[] colunasSelecionaveis, int enemyDataColumn) {
+		int numRodadas = 1 + (rodadaFinal - rodadaInicial);
+		int numTimes = 1 + (timeFinal - timeInicial);
+		inputMatrix = new double[colunasSelecionaveis.length*2+1][numRodadas*numTimes];
+		for (int j = timeInicial; j <= timeFinal; j++) {
+			for (int i = rodadaInicial; i <= rodadaFinal; i++) {
+				inputMatrix[0][(numRodadas*(j-timeInicial)) + (i-rodadaInicial)] = 1;
+				for (int k = 0; k < colunasSelecionaveis.length; k++) {
+					Cell dados = mapaDeTimes.get("time" + j).getCell(colunasSelecionaveis[k], i+1);
+					inputMatrix[k+1][(numRodadas*(j-timeInicial)) + (i-rodadaInicial)] = Double.parseDouble(dados.getContents().replace(',', '.'));
 				}
-		}
-	}
-	
-	private void setTargetMatrixWithEnemyTeamDataAndOffset(int numTimes, int numRodadas, Map<String, Sheet> mapaDeTimes, int[] resultsDataColumns) {
-		targetMatrix = new double[resultsDataColumns.length][numRodadas*numTimes];	
-		for (int j = (18-numTimes); j < 18; j++) {
-			for (int i = (31-numRodadas); i < 31; i++) {
-				for (int k = 0; k < resultsDataColumns.length; k++) {
-				Cell dados = mapaDeTimes.get("time" + (j+1)).getCell(resultsDataColumns[k], i);
-				targetMatrix[k][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = Double.parseDouble(dados.getContents()); 
+				Cell adversario = mapaDeTimes.get("time" + j).getCell(enemyDataColumn, i+1);
+				int offset = colunasSelecionaveis.length;
+				for (int k = offset; k < offset*2; k++) {
+					Cell dadosAdversario = mapaDeTimes.get("time" + adversario.getContents()).getCell(colunasSelecionaveis[k-offset], i+1);
+					inputMatrix[k+1][(numRodadas*(j-timeInicial)) + (i-rodadaInicial)] = (-1) * Double.parseDouble(dadosAdversario.getContents().replace(',', '.'));
 				}
 			}
 		}
+//		inputMatrix = new double[colunasSelecionaveis.length*2+1][numRodadas*numTimes];
+//		for (int j = (18-numTimes); j < 18; j++) {
+//			for (int i = (31-numRodadas); i < 31; i++) {
+//				inputMatrix[0][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = 1;
+//				for (int k = 0; k < colunasSelecionaveis.length; k++) {
+//					Cell dados = mapaDeTimes.get("time" + (j+1)).getCell(colunasSelecionaveis[k], i);
+//					inputMatrix[k+1][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = Double.parseDouble(dados.getContents().replace(',', '.'));
+//				}
+//				Cell adversario = mapaDeTimes.get("time" + (j+1)).getCell(enemyDataColumn, i);
+//				int offset = colunasSelecionaveis.length;
+//				for (int k = offset; k < offset*2; k++) {
+//					Cell dadosAdversario = mapaDeTimes.get("time" + adversario.getContents()).getCell(colunasSelecionaveis[k-offset], i);
+//					inputMatrix[k+1][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = (-1) * Double.parseDouble(dadosAdversario.getContents().replace(',', '.'));
+//				}
+//			}
+//		}
+	}
+	
+	private void setTargetMatrixWithEnemyTeamDataAndRange(int timeInicial, int timeFinal, int rodadaInicial, int rodadaFinal, Map<String, Sheet> mapaDeTimes, int[] resultsDataColumns) {
+		int numRodadas = 1 + (rodadaFinal - rodadaInicial);
+		int numTimes = 1 + (timeFinal - timeInicial);
+		targetMatrix = new double[resultsDataColumns.length][numRodadas*numTimes];
+		for (int j = timeInicial; j <= timeFinal; j++) {
+			for (int i = rodadaInicial; i <= rodadaFinal; i++) {
+				for (int k = 0; k < resultsDataColumns.length; k++) {
+				Cell dados = mapaDeTimes.get("time" + j).getCell(resultsDataColumns[k], i+1);
+				targetMatrix[k][(numRodadas*(j-timeInicial)) + (i-rodadaInicial)] = Double.parseDouble(dados.getContents()); 
+				}
+			}
+		}
+//		targetMatrix = new double[resultsDataColumns.length][numRodadas*numTimes];	
+//		for (int j = (18-numTimes); j < 18; j++) {
+//			for (int i = (31-numRodadas); i < 31; i++) {
+//				for (int k = 0; k < resultsDataColumns.length; k++) {
+//				Cell dados = mapaDeTimes.get("time" + (j+1)).getCell(resultsDataColumns[k], i);
+//				targetMatrix[k][(numRodadas*(j-(18-numTimes))) + i - (31-numRodadas)] = Double.parseDouble(dados.getContents()); 
+//				}
+//			}
+//		}
 	}
 
 	private int[] useThisColumnsOfExcelTable() {
 //		int[] colunasSelecionaveis = {4, 5, 6, 9, 12, 15}; //Brasileiro
-		int[] colunasSelecionaveis = {15}; //Italiano
+//		int[] colunasSelecionaveis = {15}; //Italiano
+		int[] colunasSelecionaveis = {16}; //Brasileiro novo
 		return colunasSelecionaveis;
 	}
 	
@@ -105,7 +136,8 @@ public class Initializer {
 	}
 	
 	int[] resultsDataColumns(){
-		int[] resultColumn = {8, 9, 10}; //Italiano
+//		int[] resultColumn = {8, 9, 10}; //Italiano
+		int[] resultColumn = {9, 10, 11}; //Brasileiro novo
 		return resultColumn;
 	}
 

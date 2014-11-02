@@ -75,7 +75,7 @@ public class FeedforwardAlgorithm {
 		setWinSuccessRatio((double) numberOfSuccessWinPredictions/ (double) numberOfWinResults);
 		setDrawSuccessRatio((double) numberOfSuccessDrawPredictions/ (double) numberOfDrawResults);
 		setLoseSuccessRatio((double) numberOfSuccessLosePredictions/ (double) numberOfLoseResults);
-		setBothSuccessRatio((double) (numberOfSuccessWinPredictions + numberOfSuccessDrawPredictions + numberOfSuccessLosePredictions)
+		setOverallSuccessRatio((double) (numberOfSuccessWinPredictions + numberOfSuccessDrawPredictions + numberOfSuccessLosePredictions)
 				/ (double) initializedData.getInputMatrix()[0].length);
 	}
 
@@ -252,7 +252,7 @@ public class FeedforwardAlgorithm {
 		return bothSuccessRatio;
 	}
 
-	public void setBothSuccessRatio(double bothSuccessRatio) {
+	public void setOverallSuccessRatio(double bothSuccessRatio) {
 		this.bothSuccessRatio = bothSuccessRatio;
 	}
 }

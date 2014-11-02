@@ -447,7 +447,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="menuPanel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="menuPanel2" min="-2" pref="311" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="resultPanel2" alignment="0" max="32767" attributes="0"/>
@@ -758,70 +758,83 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel25" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="inputRotinas1" alignment="0" pref="60" max="32767" attributes="0"/>
-                                          <Component id="inputLearningRate1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="inputErro1" alignment="1" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="43" max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="inputRodadas1" max="32767" attributes="0"/>
-                                          <Component id="inputTimes1" pref="60" max="32767" attributes="0"/>
-                                          <Component id="inputHiddenNeurons1" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="inputTimes2" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                          <Component id="inputConfidenceInterval2" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                          <Component id="inputRodadas2" min="-2" pref="60" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="botaoRodar1" min="-2" pref="150" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="botaoTreinar1" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="botaoInicializar1" alignment="0" pref="150" max="32767" attributes="0"/>
-                                          <Component id="botaoInicializar2" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="inputTimes2Inicial" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Component id="inputConfidenceInterval2" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Component id="inputRodadas2Inicial" min="-2" pref="60" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel27" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel25" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel26" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="inputRotinas1" alignment="0" pref="60" max="32767" attributes="0"/>
+                                              <Component id="inputLearningRate1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="inputErro1" alignment="1" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jLabel28" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel29" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel30" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="43" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="inputRodadas1Inicial" max="32767" attributes="0"/>
+                                              <Component id="inputTimes1Inicial" pref="60" max="32767" attributes="0"/>
+                                              <Component id="inputHiddenNeurons1" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="inputRodadas1Final" max="32767" attributes="0"/>
+                                      <Component id="inputTimes1Final" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="74" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="inputTimes2Final" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="inputRodadas2Final" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="botaoRodar1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="botaoInicializar2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="botaoTreinar1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="botaoInicializar1" alignment="1" max="32767" attributes="0"/>
+                              <Component id="botaoLoad" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -846,12 +859,18 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel28" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputRodadas1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="inputRodadas1Inicial" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="inputRodadas1Final" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel29" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="inputTimes1" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                  <Component id="inputTimes1Inicial" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="inputTimes1Final" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
@@ -863,14 +882,16 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="inputRodadas2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inputRodadas2Inicial" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inputRodadas2Final" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="inputTimes2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inputTimes2Inicial" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inputTimes2Final" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
@@ -879,15 +900,17 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="53" max="32767" attributes="0"/>
-                          <Component id="botaoInicializar1" min="-2" pref="60" max="-2" attributes="0"/>
+                          <EmptySpace pref="84" max="32767" attributes="0"/>
+                          <Component id="botaoLoad" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                          <Component id="botaoInicializar1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="botaoTreinar1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="botaoTreinar1" min="-2" pref="60" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Component id="botaoInicializar2" min="-2" pref="60" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="botaoRodar1" min="-2" pref="60" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="botaoInicializar2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="botaoRodar1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -910,7 +933,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputRotinas1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="5000"/>
+                    <Property name="text" type="java.lang.String" value="15000"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="SoccerGUI_inputRotinas"/>
@@ -918,7 +941,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputLearningRate1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="0.2"/>
+                    <Property name="text" type="java.lang.String" value="0.05"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputErro1">
@@ -936,7 +959,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="botaoInicializar1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="INICIALIZAR DADOS"/>
+                    <Property name="text" type="java.lang.String" value="INICIALIZAR DADOS PARA TREINAMENTO"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoInicializar1ActionPerformed"/>
@@ -947,9 +970,9 @@
                     <Property name="text" type="java.lang.String" value="Rodadas:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="inputRodadas1">
+                <Component class="javax.swing.JTextField" name="inputRodadas1Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="20"/>
+                    <Property name="text" type="java.lang.String" value="1"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel29">
@@ -957,9 +980,9 @@
                     <Property name="text" type="java.lang.String" value="Times:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="inputTimes1">
+                <Component class="javax.swing.JTextField" name="inputTimes1Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="18"/>
+                    <Property name="text" type="java.lang.String" value="1"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel30">
@@ -985,7 +1008,7 @@
                 </Component>
                 <Component class="javax.swing.JButton" name="botaoInicializar2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="INICIALIZAR DADOS"/>
+                    <Property name="text" type="java.lang.String" value="INICIALIZAR DADOS PARA PREDI&#xc7;&#xc3;O"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoInicializar2ActionPerformed"/>
@@ -1001,14 +1024,14 @@
                     <Property name="text" type="java.lang.String" value="Times para execu&#xe7;&#xe3;o:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="inputRodadas2">
+                <Component class="javax.swing.JTextField" name="inputRodadas2Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="9"/>
+                    <Property name="text" type="java.lang.String" value="21"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="inputTimes2">
+                <Component class="javax.swing.JTextField" name="inputTimes2Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="18"/>
+                    <Property name="text" type="java.lang.String" value="1"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel34">
@@ -1020,6 +1043,34 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0.3"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="inputRodadas1Final">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="20"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="inputTimes1Final">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="20"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="inputRodadas2Final">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="31"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="inputTimes2Final">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="20"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="botaoLoad">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="CARREGAR CAMPEONATO"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoLoadActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
