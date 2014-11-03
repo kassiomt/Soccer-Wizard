@@ -123,9 +123,9 @@ public class Initializer {
 	}
 
 	private int[] useThisColumnsOfExcelTable() {
-//		int[] colunasSelecionaveis = {4, 5, 6, 9, 12, 15}; //Brasileiro
-//		int[] colunasSelecionaveis = {15}; //Italiano
-		int[] colunasSelecionaveis = {16}; //Brasileiro novo
+//		int[] colunasSelecionaveis = {16, 17, 19, 21, 23, 25}; //Full Inicial
+		int[] colunasSelecionaveis = {16, 17}; //teste
+//		int[] colunasSelecionaveis = {16}; //Encurtado
 		return colunasSelecionaveis;
 	}
 	
@@ -136,7 +136,6 @@ public class Initializer {
 	}
 	
 	int[] resultsDataColumns(){
-//		int[] resultColumn = {8, 9, 10}; //Italiano
 		int[] resultColumn = {9, 10, 11}; //Brasileiro novo
 		return resultColumn;
 	}

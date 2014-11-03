@@ -91,7 +91,7 @@ public class SoccerGUI extends javax.swing.JFrame {
         jScrollPane14 = new javax.swing.JScrollPane();
         jTextPaneRotinas = new javax.swing.JTextPane();
         jScrollPane17 = new javax.swing.JScrollPane();
-        jTextPaneAnyRatio = new javax.swing.JTextPane();
+//        jTextPaneAnyRatio = new javax.swing.JTextPane();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane18 = new javax.swing.JScrollPane();
         jTextPaneAllRatio = new javax.swing.JTextPane();
@@ -351,8 +351,8 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         jScrollPane14.setViewportView(jTextPaneRotinas);
 
-        jTextPaneAnyRatio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jScrollPane17.setViewportView(jTextPaneAnyRatio);
+//        jTextPaneAnyRatio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+//        jScrollPane17.setViewportView(jTextPaneAnyRatio);
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -384,7 +384,7 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel31.setText("Any Ratio");
+//        jLabel31.setText("Any Ratio");
 
         javax.swing.GroupLayout resultPanel2Layout = new javax.swing.GroupLayout(resultPanel2);
         resultPanel2.setLayout(resultPanel2Layout);
@@ -825,11 +825,11 @@ public class SoccerGUI extends javax.swing.JFrame {
     private void botaoRodar1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
     	SoccerWizard.initializeDataToApplyTrainedNet();
     	FeedforwardAlgorithm result = SoccerWizard.feedforwardAlgorithm();
-    	DecimalFormat df = new DecimalFormat("0.000000");
+    	DecimalFormat df = new DecimalFormat("00.00%");
     	jTextPaneWinRatio.setText( String.valueOf(df.format(result.getWinSuccessRatio())) );
     	jTextPaneDrawRatio.setText( String.valueOf(df.format(result.getDrawSuccessRatio())) );
     	jTextPaneLoseRatio.setText( String.valueOf(df.format(result.getLoseSuccessRatio())) );
-    	jTextPaneAnyRatio.setText( String.valueOf(df.format(result.getAnyoneSuccessRatio())) );
+//    	jTextPaneAnyRatio.setText( String.valueOf(df.format(result.getAnyoneSuccessRatio())) );
     	jTextPaneAllRatio.setText( String.valueOf(df.format(result.getBothSuccessRatio())) );
     	System.out.println("APLICAÇÃO EXECUTADA!\n");
         JOptionPane.showMessageDialog(rootPane, "Aplicação executada!", "APLICAÇÃO EXECUTADA", 1);
@@ -943,7 +943,7 @@ public class SoccerGUI extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane5;
     private javax.swing.JTextPane jTextPane7;
     private javax.swing.JTextPane jTextPaneAllRatio;
-    private javax.swing.JTextPane jTextPaneAnyRatio;
+//    private javax.swing.JTextPane jTextPaneAnyRatio;
     private javax.swing.JTextPane jTextPaneDrawRatio;
     private javax.swing.JTextPane jTextPaneErroFinal;
     private javax.swing.JTextPane jTextPaneLoseRatio;
