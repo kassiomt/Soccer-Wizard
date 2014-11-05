@@ -11,11 +11,15 @@ public class BackPropagationAlgorithm {
 
 	private double[][] outputBias;
 	private double[][] hiddenBias;
-	private XYSeries chartData;
-    private double error;
+	private XYSeries maxErrorChartData;
+	private XYSeries minErrorChartData;
+	private XYSeries averageErrorChartData;
+    private double maxError;
+    private double minError;
+    private double averageError;
     private int rotinas;
 
-	public BackPropagationAlgorithm(Initializer initializedData, double learningRate, double minError, int maxRotinas) {
+	public BackPropagationAlgorithm(Initializer initializedData, double learningRate, double thresholdError, int maxRotinas) {
 
 	// STEP 0
 	// initialize weights
@@ -23,11 +27,15 @@ public class BackPropagationAlgorithm {
 	setOutputBias(BiasInitializator.outputBias(initializedData.getHiddenNeurons(), initializedData.getOutputMatrix()));
 	
 	// STEP 1	
-	setChartData(new XYSeries("Error"));
-    setError(1);
+	setMaxErrorChartData(new XYSeries("MaxError"));
+	setMinErrorChartData(new XYSeries("MinError"));
+	setAverageErrorChartData(new XYSeries("AverageError"));
+    setMaxError(1);
+    setMinError(1);
+    setAverageError(1);
     setRotinas(0);
 	
-	while (getError() > minError && getRotinas() < maxRotinas) {
+	while (getMaxError() > thresholdError && getRotinas() < maxRotinas) {
 		// STEP 2
 		double[] epochError = new double[initializedData.getInputMatrix()[0].length];
 		for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
@@ -66,12 +74,16 @@ public class BackPropagationAlgorithm {
 			epochError[l] = WeightAndErrorCalculator.squaredError(lastLayerOut, initializedData.getTargetMatrix(), l);
 		}
 
-		setError(WeightAndErrorCalculator.getMaxError(epochError));
+		setMaxError(WeightAndErrorCalculator.getMaxError(epochError));
+		setMinError(WeightAndErrorCalculator.getMinError(epochError));
+		setAverageError(WeightAndErrorCalculator.getAverageError(epochError));
 		setRotinas(rotinas+1);
-		getChartData().add(rotinas, error);
+		getMaxErrorChartData().add(rotinas, maxError);
+		getMinErrorChartData().add(rotinas, minError);
+		getAverageErrorChartData().add(rotinas, averageError);
 	}
 
-	System.out.format("Treinamento concluido com sucesso após:%n%d rotinas%ne com:%n%f de erro máximo%n%n", rotinas, error);
+	System.out.format("Treinamento concluido com sucesso após:%n%d rotinas%ne com:%n%f de erro máximo%n%n", rotinas, maxError);
 
 	}
 
@@ -91,20 +103,20 @@ public class BackPropagationAlgorithm {
 		this.hiddenBias = hiddenBias;
 	}
 
-	public XYSeries getChartData() {
-		return chartData;
+	public XYSeries getMaxErrorChartData() {
+		return maxErrorChartData;
 	}
 
-	public void setChartData(XYSeries chartData) {
-		this.chartData = chartData;
+	public void setMaxErrorChartData(XYSeries chartData) {
+		this.maxErrorChartData = chartData;
 	}
 
-	public double getError() {
-		return error;
+	public double getMaxError() {
+		return maxError;
 	}
 
-	public void setError(double error) {
-		this.error = error;
+	public void setMaxError(double error) {
+		this.maxError = error;
 	}
 
 	public int getRotinas() {
@@ -113,5 +125,37 @@ public class BackPropagationAlgorithm {
 
 	public void setRotinas(int rotinas) {
 		this.rotinas = rotinas;
+	}
+
+	public double getMinError() {
+		return minError;
+	}
+
+	public void setMinError(double minError) {
+		this.minError = minError;
+	}
+
+	public double getAverageError() {
+		return averageError;
+	}
+
+	public void setAverageError(double averageError) {
+		this.averageError = averageError;
+	}
+
+	public XYSeries getMinErrorChartData() {
+		return minErrorChartData;
+	}
+
+	public void setMinErrorChartData(XYSeries minErrorChartData) {
+		this.minErrorChartData = minErrorChartData;
+	}
+
+	public XYSeries getAverageErrorChartData() {
+		return averageErrorChartData;
+	}
+
+	public void setAverageErrorChartData(XYSeries averageErrorChartData) {
+		this.averageErrorChartData = averageErrorChartData;
 	}
 }

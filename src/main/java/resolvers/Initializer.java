@@ -124,7 +124,7 @@ public class Initializer {
 
 	private int[] useThisColumnsOfExcelTable() {
 //		int[] colunasSelecionaveis = {16, 17, 19, 21, 23, 25}; //Full Inicial
-		int[] colunasSelecionaveis = {16, 17}; //teste
+		int[] colunasSelecionaveis = {16, 17, 19, 21, 23, 25}; //teste
 //		int[] colunasSelecionaveis = {16}; //Encurtado
 		return colunasSelecionaveis;
 	}

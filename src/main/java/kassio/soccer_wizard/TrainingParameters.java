@@ -3,7 +3,7 @@ package kassio.soccer_wizard;
 public class TrainingParameters {
 	
 	private double learningRate;
-	private double minError;
+	private double thresholdError;
 	private int maxRotinas;
 	private int hiddenNeurons;
 	private int numRodadaInicialForApplication;
@@ -18,11 +18,11 @@ public class TrainingParameters {
 	public void setLearningRate(double learningRate) {
 		this.learningRate = learningRate;
 	}
-	public double getMinError() {
-		return minError;
+	public double getThresholdError() {
+		return thresholdError;
 	}
-	public void setMinError(double minError) {
-		this.minError = minError;
+	public void setThresholdError(double thresholdError) {
+		this.thresholdError = thresholdError;
 	}
 	public int getMaxRotinas() {
 		return maxRotinas;

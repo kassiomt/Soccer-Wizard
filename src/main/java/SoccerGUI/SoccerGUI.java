@@ -87,11 +87,9 @@ public class SoccerGUI extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jScrollPane13 = new javax.swing.JScrollPane();
-        jTextPaneErroFinal = new javax.swing.JTextPane();
+        jTextPaneErroMinimoFinal = new javax.swing.JTextPane();
         jScrollPane14 = new javax.swing.JScrollPane();
         jTextPaneRotinas = new javax.swing.JTextPane();
-        jScrollPane17 = new javax.swing.JScrollPane();
-//        jTextPaneAnyRatio = new javax.swing.JTextPane();
         jLabel21 = new javax.swing.JLabel();
         jScrollPane18 = new javax.swing.JScrollPane();
         jTextPaneAllRatio = new javax.swing.JTextPane();
@@ -104,7 +102,12 @@ public class SoccerGUI extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        jTextPaneErroMaximoFinal = new javax.swing.JTextPane();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        jTextPaneErroFinal2 = new javax.swing.JTextPane();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
         menuPanel2 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
@@ -189,7 +192,7 @@ public class SoccerGUI extends javax.swing.JFrame {
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 509, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1097, Short.MAX_VALUE)
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6))
@@ -342,17 +345,14 @@ public class SoccerGUI extends javax.swing.JFrame {
         resultPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18))); // NOI18N
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel19.setText("Erro Final:");
+        jLabel19.setText("Erro Mínimo Final:");
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setText("Rotinas:");
 
-        jScrollPane13.setViewportView(jTextPaneErroFinal);
+        jScrollPane13.setViewportView(jTextPaneErroMinimoFinal);
 
         jScrollPane14.setViewportView(jTextPaneRotinas);
-
-//        jTextPaneAnyRatio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-//        jScrollPane17.setViewportView(jTextPaneAnyRatio);
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -382,9 +382,15 @@ public class SoccerGUI extends javax.swing.JFrame {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel24.setText("Lose Ratio");
 
-        jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-//        jLabel31.setText("Any Ratio");
+        jScrollPane15.setViewportView(jTextPaneErroMaximoFinal);
+
+        jScrollPane16.setViewportView(jTextPaneErroFinal2);
+
+        jLabel35.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel35.setText("Erro Máximo Final:");
+
+        jLabel36.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel36.setText("Erro Médio Final:");
 
         javax.swing.GroupLayout resultPanel2Layout = new javax.swing.GroupLayout(resultPanel2);
         resultPanel2.setLayout(resultPanel2Layout);
@@ -393,60 +399,68 @@ public class SoccerGUI extends javax.swing.JFrame {
             .addGroup(resultPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addGap(18, 18, 18))
-                    .addGroup(resultPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(9, 9, 9)))
+                    .addComponent(jLabel36)
+                    .addComponent(jLabel19)
+                    .addComponent(jLabel35))
+                .addGap(10, 10, 10)
                 .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jScrollPane14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 315, Short.MAX_VALUE)
+                    .addComponent(jScrollPane13)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanel2Layout.createSequentialGroup()
+                    .addGroup(resultPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel20)
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 651, Short.MAX_VALUE)
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(resultPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane21, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(43, 43, 43)
+                .addComponent(jLabel23)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel31)
-                    .addComponent(jLabel23))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane18, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         resultPanel2Layout.setVerticalGroup(
             resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(resultPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(resultPanel2Layout.createSequentialGroup()
                         .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane13, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                            .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(40, 40, 40))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, resultPanel2Layout.createSequentialGroup()
+                                .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(resultPanel2Layout.createSequentialGroup()
+                                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(resultPanel2Layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(jScrollPane13)))
+                                .addGap(41, 41, 41)))
+                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(resultPanel2Layout.createSequentialGroup()
-                        .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane19, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane19))
+                            .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -454,8 +468,15 @@ public class SoccerGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane21, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(resultPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(resultPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jLabel25.setText("Alfa:");
@@ -702,7 +723,7 @@ public class SoccerGUI extends javax.swing.JFrame {
     private void botaoInicializarXoRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInicializarActionPerformed
         SoccerWizard.trainingParameters.setLearningRate(Double.parseDouble(inputLearningRate.getText()));
         SoccerWizard.trainingParameters.setMaxRotinas(Integer.parseInt(inputRotinas.getText()));
-        SoccerWizard.trainingParameters.setMinError(Double.parseDouble(inputErro.getText()));
+        SoccerWizard.trainingParameters.setThresholdError(Double.parseDouble(inputErro.getText()));
         System.out.println("Learning Rate, Máximo de Rotinas e Erro Mínimo ATUALIZADOS\n");
         
         SoccerWizard.initializeDataXorForTraining();
@@ -716,12 +737,12 @@ public class SoccerGUI extends javax.swing.JFrame {
         System.out.println("REDE TREINADA botaoTreinarActionPerformed\n");
         
         DecimalFormat df = new DecimalFormat("0.000000");
-        jTextPane1.setText( String.valueOf(df.format(SoccerWizard.bias.getError())) );
+        jTextPane1.setText( String.valueOf(df.format(SoccerWizard.bias.getMaxError())) );
         jTextPane3.setText( String.valueOf(SoccerWizard.bias.getRotinas()));
         
         BuildErrorChart errorChart = null;
         try {
-            errorChart = new BuildErrorChart(SoccerWizard.bias.getChartData());
+            errorChart = new BuildErrorChart(SoccerWizard.bias.getMaxErrorChartData());
         } catch (IOException ex) {
             Logger.getLogger(SoccerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -772,7 +793,7 @@ public class SoccerGUI extends javax.swing.JFrame {
     private void botaoInicializar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInicializar2ActionPerformed
         SoccerWizard.trainingParameters.setLearningRate(Double.parseDouble(inputLearningRate1.getText()));
         SoccerWizard.trainingParameters.setMaxRotinas(Integer.parseInt(inputRotinas1.getText()));
-        SoccerWizard.trainingParameters.setMinError(Double.parseDouble(inputErro1.getText()));
+        SoccerWizard.trainingParameters.setThresholdError(Double.parseDouble(inputErro1.getText()));
         SoccerWizard.trainingParameters.setNumTimeInicialForApplication(Integer.parseInt(inputTimes1Inicial.getText()));
         SoccerWizard.trainingParameters.setNumTimeFinalForApplication(Integer.parseInt(inputTimes1Final.getText()));
         SoccerWizard.trainingParameters.setNumRodadaInicialForApplication(Integer.parseInt(inputRodadas1Inicial.getText()));
@@ -795,15 +816,19 @@ public class SoccerGUI extends javax.swing.JFrame {
 		System.out.println("REDE TREINADA\n");
 		
 		DecimalFormat df = new DecimalFormat("0.000000");
-		jTextPaneErroFinal.setText( String.valueOf(df.format(SoccerWizard.bias.getError())) );
+		jTextPaneErroMinimoFinal.setText( String.valueOf(df.format(SoccerWizard.bias.getMinError())));
+		jTextPaneErroMaximoFinal.setText( String.valueOf(df.format(SoccerWizard.bias.getMaxError())));
+		jTextPaneErroFinal2.setText( String.valueOf(df.format(SoccerWizard.bias.getAverageError())));
 		jTextPaneRotinas.setText( String.valueOf(SoccerWizard.bias.getRotinas()));
 		
 		BuildErrorChart errorChart = null;
+		
 		try {
-		    errorChart = new BuildErrorChart(SoccerWizard.bias.getChartData());
+		    errorChart = new BuildErrorChart(SoccerWizard.bias.getMinErrorChartData(),SoccerWizard.bias.getMaxErrorChartData(), SoccerWizard.bias.getAverageErrorChartData());
 		} catch (IOException ex) {
 		    Logger.getLogger(SoccerGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
+		
 		chartPanel2.removeAll();
 		chartPanel2.add(new ChartPanel(errorChart.chart));
 		chartPanel2.setVisible(false);
@@ -912,10 +937,11 @@ public class SoccerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -925,7 +951,8 @@ public class SoccerGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane14;
-    private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
@@ -943,9 +970,10 @@ public class SoccerGUI extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane5;
     private javax.swing.JTextPane jTextPane7;
     private javax.swing.JTextPane jTextPaneAllRatio;
-//    private javax.swing.JTextPane jTextPaneAnyRatio;
     private javax.swing.JTextPane jTextPaneDrawRatio;
-    private javax.swing.JTextPane jTextPaneErroFinal;
+    private javax.swing.JTextPane jTextPaneErroFinal2;
+    private javax.swing.JTextPane jTextPaneErroMaximoFinal;
+    private javax.swing.JTextPane jTextPaneErroMinimoFinal;
     private javax.swing.JTextPane jTextPaneLoseRatio;
     private javax.swing.JTextPane jTextPaneRotinas;
     private javax.swing.JTextPane jTextPaneWinRatio;

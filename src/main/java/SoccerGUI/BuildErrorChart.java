@@ -24,5 +24,19 @@ public class BuildErrorChart {
         int height=900;
         File XYlineChart = new File("XYline_Chart.png");
         ChartUtilities.saveChartAsPNG(XYlineChart, chart, width, height);
-	}       
+	}
+	
+	public BuildErrorChart(XYSeries minChartData, XYSeries maxChartData, XYSeries averageChartData) throws IOException {
+		XYSeriesCollection chartDataSeries= new XYSeriesCollection();
+        chartDataSeries.addSeries(minChartData);
+        chartDataSeries.addSeries(maxChartData);
+        chartDataSeries.addSeries(averageChartData);
+		
+		chart = ChartFactory.createXYLineChart("", "Ciclo", "Erro", chartDataSeries, PlotOrientation.VERTICAL, false, true, false);
+		
+		int width=1600;
+        int height=900;
+        File XYlineChart = new File("XYline_Chart.png");
+        ChartUtilities.saveChartAsPNG(XYlineChart, chart, width, height);
+	}  
 }

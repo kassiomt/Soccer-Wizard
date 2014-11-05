@@ -57,13 +57,6 @@ public class FeedforwardAlgorithm {
 	}
 
 	private void errorCalculation(Initializer initializedData, double confidenceInterval, double[][] target) {
-		//double erro = bias.getError();
-//		int numberOfSuccessWin = 0;
-//		int numberOfSuccessDraw = 0;
-//		int numberOfSuccessLose = 0;
-//		int[] controlOfSuccessAnyone = {0,0,0};
-//		int numberOfSuccessAnyone = 0;
-//		int numberOfSuccessAll = 0;
 		winFailureMatrix = new double[target.length][target[0].length];
 		drawFailureMatrix = new double[target.length][target[0].length];
 		loseFailureMatrix = new double[target.length][target[0].length];
@@ -71,13 +64,7 @@ public class FeedforwardAlgorithm {
 		for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
 			thirdErrorCalculation(target, l);
 		}
-		
-//		setWinSuccessRatio((double) numberOfSuccessWin/ (double) initializedData.getInputMatrix()[0].length);
-//		setDrawSuccessRatio((double) numberOfSuccessDraw/ (double) initializedData.getInputMatrix()[0].length);
-//		setLoseSuccessRatio((double) numberOfSuccessLose/ (double) initializedData.getInputMatrix()[0].length);
-//		setAnyoneSuccessRatio((double) numberOfSuccessAnyone/ (double) initializedData.getInputMatrix()[0].length);
-//		setBothSuccessRatio((double) numberOfSuccessAll/ (double) initializedData.getInputMatrix()[0].length);
-		
+				
 		setWinSuccessRatio((double) numberOfSuccessWinPredictions/ (double) numberOfWinResults);
 		setDrawSuccessRatio((double) numberOfSuccessDrawPredictions/ (double) numberOfDrawResults);
 		setLoseSuccessRatio((double) numberOfSuccessLosePredictions/ (double) numberOfLoseResults);
@@ -172,38 +159,6 @@ public class FeedforwardAlgorithm {
 		loseFailureMatrix[1][l] = getLastLayerOutMatrix()[1][l];
 		loseFailureMatrix[2][l] = getLastLayerOutMatrix()[2][l];
 	}
-
-//	OLD ERROR CALCULATION
-//	if ( (target[0][l]-confidenceInterval < getLastLayerOutMatrix()[0][l] && getLastLayerOutMatrix()[0][l] < target[0][l]+confidenceInterval)// ||
-//		 //(target[0][l]-0.1 < getLastLayerOutMatrix()[0][l]+erro && getLastLayerOutMatrix()[0][l]+erro < target[0][l]+0.1) ||
-//		 //(target[0][l]-0.1 < getLastLayerOutMatrix()[0][l]-erro && getLastLayerOutMatrix()[0][l]-erro < target[0][l]+0.1)
-//			) {
-//		numberOfSuccessWin++;
-//		controlOfSuccessAnyone[0] = 1;
-//	}
-//	if ( (target[1][l]-confidenceInterval < getLastLayerOutMatrix()[1][l] && getLastLayerOutMatrix()[1][l] < target[1][l]+confidenceInterval)// ||
-//		 //(target[0][l]-0.1 < getLastLayerOutMatrix()[0][l]+erro && getLastLayerOutMatrix()[0][l]+erro < target[0][l]+0.1) ||
-//		 //(target[0][l]-0.1 < getLastLayerOutMatrix()[0][l]-erro && getLastLayerOutMatrix()[0][l]-erro < target[0][l]+0.1)
-//			) {
-//		numberOfSuccessDraw++;
-//		controlOfSuccessAnyone[1] = 1;
-//	}
-//	if ( (target[2][l]-confidenceInterval < getLastLayerOutMatrix()[2][l] && getLastLayerOutMatrix()[2][l] < target[2][l]+confidenceInterval)// ||
-//			 //(target[0][l]-0.1 < getLastLayerOutMatrix()[0][l]+erro && getLastLayerOutMatrix()[0][l]+erro < target[0][l]+0.1) ||
-//			 //(target[0][l]-0.1 < getLastLayerOutMatrix()[0][l]-erro && getLastLayerOutMatrix()[0][l]-erro < target[0][l]+0.1)
-//				) {
-//		numberOfSuccessLose	++;
-//		controlOfSuccessAnyone[2] = 1;
-//	}
-//	if ( controlOfSuccessAnyone[0] == 1 || controlOfSuccessAnyone[1] == 1 || controlOfSuccessAnyone[2] == 1) {
-//		numberOfSuccessAnyone++;
-//	}
-//	if ( controlOfSuccessAnyone[0] == 1 && controlOfSuccessAnyone[1] == 1 && controlOfSuccessAnyone[2] == 1) {
-//		numberOfSuccessAll++;
-//	}	
-//	controlOfSuccessAnyone[0] = 0;
-//	controlOfSuccessAnyone[1] = 0;
-//	controlOfSuccessAnyone[2] = 0;
 
 	public FeedforwardAlgorithm(BackPropagationAlgorithm bias) {
 
