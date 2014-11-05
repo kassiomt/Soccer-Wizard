@@ -25,8 +25,6 @@ public class SoccerWizard {
  
 		new SoccerGUI().setVisible(true);
 		
-//		new FeedForwardAlgorithm(initializedData.getInputMatrix(), bias);
-//		new FeedForwardAlgorithm(bias);
 	}
 	
 	public static Initializer initializeDataXorForTraining() {
@@ -47,7 +45,7 @@ public class SoccerWizard {
 	}
 	
 	public static BackPropagationAlgorithm backPropagationAlgorithm() {
-		return bias = new BackPropagationAlgorithm(initializedData, trainingParameters.getLearningRate(), trainingParameters.getMinError(), trainingParameters.getMaxRotinas());
+		return bias = new BackPropagationAlgorithm(initializedData, trainingParameters.getLearningRate(), trainingParameters.getThresholdError(), trainingParameters.getMaxRotinas());
 	}
 	
 	public static FeedforwardAlgorithm xorFeedforwardAlgorithm() {

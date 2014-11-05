@@ -5,6 +5,9 @@ import calculators.FeedforwardCalculator;
 public class FeedforwardAlgorithm {
 
 	private double[][] lastLayerOutMatrix;
+	double[][] winFailureMatrix;
+	double[][] drawFailureMatrix;
+	double[][] loseFailureMatrix;
 	private double winSuccessRatio;
 	private double drawSuccessRatio;
 	private double loseSuccessRatio;
@@ -61,6 +64,9 @@ public class FeedforwardAlgorithm {
 //		int[] controlOfSuccessAnyone = {0,0,0};
 //		int numberOfSuccessAnyone = 0;
 //		int numberOfSuccessAll = 0;
+		winFailureMatrix = new double[target.length][target[0].length];
+		drawFailureMatrix = new double[target.length][target[0].length];
+		loseFailureMatrix = new double[target.length][target[0].length];
 		
 		for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
 			thirdErrorCalculation(target, l);
@@ -79,7 +85,7 @@ public class FeedforwardAlgorithm {
 				/ (double) initializedData.getInputMatrix()[0].length);
 	}
 
-	private void thirdErrorCalculation(double[][] target, int l) {
+		private void thirdErrorCalculation(double[][] target, int l) {
 		boolean isWin = false;
 		boolean isDraw = false;
 		boolean isLose = false;
@@ -123,26 +129,48 @@ public class FeedforwardAlgorithm {
 		numberOfLosePrediction++;
 		return isLose = true;
 	}
-	
-	private void checkLoseResult(double[][] target, int l, boolean isLose) {
-		if (target[2][l] == 1) {
-			numberOfLoseResults++;
-			if (isLose)	numberOfSuccessLosePredictions++;
-		}
-	}
-
-	private void checkDrawResult(double[][] target, int l, boolean isDraw) {
-		if (target[1][l] == 1) {
-			numberOfDrawResults++;
-			if (isDraw)	numberOfSuccessDrawPredictions++;
-		}
-	}
 
 	private void checkWinResult(double[][] target, int l, boolean isWin) {
 		if (target[0][l] == 1){
 			numberOfWinResults++;
 			if (isWin)	numberOfSuccessWinPredictions++;
+			if (!isWin) recordWinFailures(target, l);
+			
 		}
+	}
+	
+	private void checkDrawResult(double[][] target, int l, boolean isDraw) {
+		if (target[1][l] == 1) {
+			numberOfDrawResults++;
+			if (isDraw)	numberOfSuccessDrawPredictions++;
+			if (!isDraw) recordDrawFailures(target, l);
+		}
+	}
+
+	private void checkLoseResult(double[][] target, int l, boolean isLose) {
+		if (target[2][l] == 1) {
+			numberOfLoseResults++;
+			if (isLose)	numberOfSuccessLosePredictions++;
+			if (!isLose) recordLoseFailures(target, l);
+		}
+	}
+	
+	private void recordWinFailures(double[][] target, int l) {
+		winFailureMatrix[0][l] = getLastLayerOutMatrix()[0][l];
+		winFailureMatrix[1][l] = getLastLayerOutMatrix()[1][l];
+		winFailureMatrix[2][l] = getLastLayerOutMatrix()[2][l];
+	}
+	
+	private void recordDrawFailures(double[][] target, int l) {
+		drawFailureMatrix[0][l] = getLastLayerOutMatrix()[0][l];
+		drawFailureMatrix[1][l] = getLastLayerOutMatrix()[1][l];
+		drawFailureMatrix[2][l] = getLastLayerOutMatrix()[2][l];
+	}
+	
+	private void recordLoseFailures(double[][] target, int l) {
+		loseFailureMatrix[0][l] = getLastLayerOutMatrix()[0][l];
+		loseFailureMatrix[1][l] = getLastLayerOutMatrix()[1][l];
+		loseFailureMatrix[2][l] = getLastLayerOutMatrix()[2][l];
 	}
 
 //	OLD ERROR CALCULATION
@@ -176,7 +204,6 @@ public class FeedforwardAlgorithm {
 //	controlOfSuccessAnyone[0] = 0;
 //	controlOfSuccessAnyone[1] = 0;
 //	controlOfSuccessAnyone[2] = 0;
-
 
 	public FeedforwardAlgorithm(BackPropagationAlgorithm bias) {
 
