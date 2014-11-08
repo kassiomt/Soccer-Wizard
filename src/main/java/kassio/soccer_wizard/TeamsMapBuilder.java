@@ -51,6 +51,8 @@ public class TeamsMapBuilder {
 //		teamsMap.put("time17", workbook.getSheet("Venezia"));
 //		teamsMap.put("time18", workbook.getSheet("Verona"));
 		
+		teamsMap.put("timeRandom", workbook.getSheet("Dados Randomizados"));
+		teamsMap.put("adversarioRandom", workbook.getSheet("Adversario Randomizado"));
 		teamsMap.put("time1", workbook.getSheet("Time 1"));
 		teamsMap.put("time2", workbook.getSheet("Time 2"));
 		teamsMap.put("time3", workbook.getSheet("Time 3"));

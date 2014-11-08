@@ -794,10 +794,10 @@ public class SoccerGUI extends javax.swing.JFrame {
         SoccerWizard.trainingParameters.setLearningRate(Double.parseDouble(inputLearningRate1.getText()));
         SoccerWizard.trainingParameters.setMaxRotinas(Integer.parseInt(inputRotinas1.getText()));
         SoccerWizard.trainingParameters.setThresholdError(Double.parseDouble(inputErro1.getText()));
-        SoccerWizard.trainingParameters.setNumTimeInicialForApplication(Integer.parseInt(inputTimes1Inicial.getText()));
-        SoccerWizard.trainingParameters.setNumTimeFinalForApplication(Integer.parseInt(inputTimes1Final.getText()));
-        SoccerWizard.trainingParameters.setNumRodadaInicialForApplication(Integer.parseInt(inputRodadas1Inicial.getText()));
-        SoccerWizard.trainingParameters.setNumRodadaFinalForApplication(Integer.parseInt(inputRodadas1Final.getText()));
+        SoccerWizard.trainingParameters.setNumTeamsForTraining(Integer.parseInt(inputTimes1Inicial.getText()));
+        SoccerWizard.trainingParameters.setNumTeamsTotalForTraining(Integer.parseInt(inputTimes1Final.getText()));
+        SoccerWizard.trainingParameters.setNumRodadasForTraining(Integer.parseInt(inputRodadas1Inicial.getText()));
+        SoccerWizard.trainingParameters.setNumRodadasTotalForTraining(Integer.parseInt(inputRodadas1Final.getText()));
         SoccerWizard.trainingParameters.setHiddenNeurons(Integer.parseInt(inputHiddenNeurons1.getText()));
         
         System.out.println("Learning Rate, Máximo de Rotinas, Erro Mínimo, Rodadas para treino, Times utilizados e Neurônios intermediários ATUALIZADOS\n");
@@ -838,10 +838,10 @@ public class SoccerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoTreinar2ActionPerformed
 
     private void botaoInicializar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTreinar3ActionPerformed
-    	SoccerWizard.trainingParameters.setNumTimeInicialForApplication(Integer.parseInt(inputTimes2Inicial.getText()));
-    	SoccerWizard.trainingParameters.setNumTimeFinalForApplication(Integer.parseInt(inputTimes2Final.getText()));
-    	SoccerWizard.trainingParameters.setNumRodadaInicialForApplication(Integer.parseInt(inputRodadas2Inicial.getText()));
-    	SoccerWizard.trainingParameters.setNumRodadaFinalForApplication(Integer.parseInt(inputRodadas2Final.getText()));
+    	SoccerWizard.trainingParameters.setNumTeamsForApplication(Integer.parseInt(inputTimes2Inicial.getText()));
+    	SoccerWizard.trainingParameters.setNumTeamsTotalForApplication(Integer.parseInt(inputTimes2Final.getText()));
+    	SoccerWizard.trainingParameters.setNumRodadasForApplication(Integer.parseInt(inputRodadas2Inicial.getText()));
+    	SoccerWizard.trainingParameters.setNumRodadaTotalForApplication(Integer.parseInt(inputRodadas2Final.getText()));
         SoccerWizard.trainingParameters.setConfidenceInterval(Double.parseDouble(inputConfidenceInterval2.getText()));
         System.out.println("Times e Rodadas para aplicação atualizados!\n");
         JOptionPane.showMessageDialog(rootPane, "Aplicação preparada, agora é só rodar sua rede neural!", "APLICAÇÃO PREPARADA", 1);

@@ -32,16 +32,16 @@ public class SoccerWizard {
 	}
 	
 	public static Initializer initializeDataForTraining() {
-		return initializedData = new Initializer(trainingParameters.getNumTimeInicialForApplication(),
-				trainingParameters.getNumTimeFinalForApplication(), trainingParameters.getNumRodadaInicialForApplication(),
-				trainingParameters.getNumRodadaFinalForApplication(), trainingParameters.getHiddenNeurons(), 
+		return initializedData = new Initializer(trainingParameters.getNumTeamsForTraining(),
+				trainingParameters.getNumTeamsTotalForTraining(), trainingParameters.getNumRodadasForTraining(),
+				trainingParameters.getNumRodadasTotalForTraining(), trainingParameters.getHiddenNeurons(), 
 				teamsMapBuilt.getTeamsMap());
 	}
 	
 	public static Initializer initializeDataToApplyTrainedNet(){
-		return dataForApplication = new Initializer(trainingParameters.getNumTimeInicialForApplication(),
-				trainingParameters.getNumTimeFinalForApplication(), trainingParameters.getNumRodadaInicialForApplication(),
-				trainingParameters.getNumRodadaFinalForApplication(), teamsMapBuilt.getTeamsMap());
+		return dataForApplication = new Initializer(trainingParameters.getNumTeamsForApplication(),
+				trainingParameters.getNumTeamsTotalForApplication(), trainingParameters.getNumRodadasForApplication(),
+				trainingParameters.getNumRodadaTotalForApplication(), teamsMapBuilt.getTeamsMap(), initializedData.getGamesRandom());
 	}
 	
 	public static BackPropagationAlgorithm backPropagationAlgorithm() {

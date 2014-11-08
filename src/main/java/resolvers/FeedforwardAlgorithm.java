@@ -29,7 +29,7 @@ public class FeedforwardAlgorithm {
 
 		System.out.println("Começando aplicação");
 		double[][] target = initializedData.getTargetMatrix();
-		setLastLayerOutMatrix(new double[initializedData.resultsDataColumns().length][initializedData.getInputMatrix()[0].length]);
+		setLastLayerOutMatrix(new double[initializedData.outputDataColumns().length][initializedData.getInputMatrix()[0].length]);
 		
 		for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
 			// Feedforward

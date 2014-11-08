@@ -3,13 +3,18 @@ package kassio.soccer_wizard;
 public class TrainingParameters {
 	
 	private double learningRate;
-	private double thresholdError;
 	private int maxRotinas;
+	private double thresholdError;
+	private int numRodadasForTraining;
+	private int numRodadasTotalForTraining;
+	private int numTeamsForTraining;
+	private int numTeamsTotalForTraining;
 	private int hiddenNeurons;
-	private int numRodadaInicialForApplication;
-	private int numTimeInicialForApplication;
-	private int numRodadaFinalForApplication;
-	private int numTimeFinalForApplication;
+	
+	private int numRodadasForApplication;
+	private int numRodadaTotalForApplication;
+	private int numTeamsForApplication;
+	private int numTeamsTotalForApplication;
 	private double confidenceInterval;
 	
 	public double getLearningRate() {
@@ -36,17 +41,17 @@ public class TrainingParameters {
 	public void setHiddenNeurons(int hiddenNeurons) {
 		this.hiddenNeurons = hiddenNeurons;
 	}
-	public int getNumTimeFinalForApplication() {
-		return numTimeFinalForApplication;
+	public int getNumTeamsTotalForApplication() {
+		return numTeamsTotalForApplication;
 	}
-	public void setNumTimeFinalForApplication(int numTimesForApplication) {
-		this.numTimeFinalForApplication = numTimesForApplication;
+	public void setNumTeamsTotalForApplication(int numTeamsTotalForApplication) {
+		this.numTeamsTotalForApplication = numTeamsTotalForApplication;
 	}
-	public int getNumRodadaFinalForApplication() {
-		return numRodadaFinalForApplication;
+	public int getNumRodadaTotalForApplication() {
+		return numRodadaTotalForApplication;
 	}
-	public void setNumRodadaFinalForApplication(int numRodadasForApplication) {
-		this.numRodadaFinalForApplication = numRodadasForApplication;
+	public void setNumRodadaTotalForApplication(int numRodadaTotalForApplication) {
+		this.numRodadaTotalForApplication = numRodadaTotalForApplication;
 	}
 	public double getConfidenceInterval() {
 		return confidenceInterval;
@@ -54,17 +59,40 @@ public class TrainingParameters {
 	public void setConfidenceInterval(double confidenceInterval) {
 		this.confidenceInterval = confidenceInterval;
 	}
-	public int getNumRodadaInicialForApplication() {
-		return numRodadaInicialForApplication;
+	public int getNumRodadasForApplication() {
+		return numRodadasForApplication;
 	}
-	public void setNumRodadaInicialForApplication(
-			int numRodadaInicialForApplication) {
-		this.numRodadaInicialForApplication = numRodadaInicialForApplication;
+	public void setNumRodadasForApplication(int numRodadasForApplication) {
+		this.numRodadasForApplication = numRodadasForApplication;
 	}
-	public int getNumTimeInicialForApplication() {
-		return numTimeInicialForApplication;
+	public int getNumTeamsForApplication() {
+		return numTeamsForApplication;
 	}
-	public void setNumTimeInicialForApplication(int numTimeInicialForApplication) {
-		this.numTimeInicialForApplication = numTimeInicialForApplication;
+	public void setNumTeamsForApplication(int numTeamsForApplication) {
+		this.numTeamsForApplication = numTeamsForApplication;
+	}
+	public int getNumRodadasForTraining() {
+		return numRodadasForTraining;
+	}
+	public void setNumRodadasForTraining(int numRodadasForTraining) {
+		this.numRodadasForTraining = numRodadasForTraining;
+	}
+	public int getNumRodadasTotalForTraining() {
+		return numRodadasTotalForTraining;
+	}
+	public void setNumRodadasTotalForTraining(int numRodadasTotalForTraining) {
+		this.numRodadasTotalForTraining = numRodadasTotalForTraining;
+	}
+	public int getNumTeamsForTraining() {
+		return numTeamsForTraining;
+	}
+	public void setNumTeamsForTraining(int numTeamsForTraining) {
+		this.numTeamsForTraining = numTeamsForTraining;
+	}
+	public int getNumTeamsTotalForTraining() {
+		return numTeamsTotalForTraining;
+	}
+	public void setNumTeamsTotalForTraining(int numTeamsTotalForTraining) {
+		this.numTeamsTotalForTraining = numTeamsTotalForTraining;
 	}	
 }
