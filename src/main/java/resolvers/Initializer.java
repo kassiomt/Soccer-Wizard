@@ -20,8 +20,8 @@ public class Initializer {
 
 	private int[] useThisColumnsOfExcelTable() {
 //		int[] colunasSelecionaveis = {16, 17, 19, 21, 23, 25}; //Full Inicial
-		int[] inputColumns = {16, 17, 19, 21, 23, 25}; //teste
-//		int[] colunasSelecionaveis = {16}; //Encurtado
+		int[] inputColumns = {16, 17}; //teste
+//		int[] colunasSelecionaveis = {16, 17}; //Encurtado
 		return inputColumns;
 	}
 	
@@ -66,7 +66,7 @@ public class Initializer {
 		
 		setHiddenNeurons(new double[hiddenNeurons]);
 		
-		setOutputMatrix(new double[outputColumns.length][numberOfTrainingData]);
+		setOutputMatrix(new double[outputColumns.length*2][numberOfTrainingData]);
 
 		setTargetMatrixWithRandomData(numberOfTrainingData, getGamesRandom(), outputColumns, mapaDeTimes);
 	}
@@ -152,27 +152,51 @@ public class Initializer {
 	private void setApplicationInputMatrixWithRandomData(int startOfApplicationData, int numberOfApplicationData, int[] gamesRandom, int[] inputColumns, Map<String, Sheet> mapaDeTimes) {
 		inputMatrix = new double[inputColumns.length*2+1][numberOfApplicationData];
 		
-		for (int i = startOfApplicationData; i < gamesRandom.length; i++) {			
+		for (int i = 0; i < numberOfApplicationData; i++) {
 			inputMatrix[0][i] = 1;
-			setTeamDataOnInputMatrix(i, gamesRandom, inputColumns, mapaDeTimes);
-			setEnemyTeamDataOnInputMatrix(i, gamesRandom, inputColumns, mapaDeTimes);
+			setTeamDataOnInputMatrixWithOffset(i, startOfApplicationData, gamesRandom, inputColumns, mapaDeTimes);
+			setEnemyTeamDataOnInputMatrixWithOffset(i, startOfApplicationData, gamesRandom, inputColumns, mapaDeTimes);
 		}
 	}
 	
 	private void setApplicationTargetMatrixWithRandomData(int startOfApplicationData, int numberOfApplicationData, int[] gamesRandom, int[] outputColumns, Map<String, Sheet> mapaDeTimes) {
 		targetMatrix = new double[outputColumns.length*2][numberOfApplicationData];
 		
-		for (int i = startOfApplicationData; i < gamesRandom.length; i++) {
-			setTeamDataOnTargetMatrix(i, gamesRandom, outputColumns, mapaDeTimes);
-			setEnemyTeamDataOnTargetMatrix(i, gamesRandom, outputColumns, mapaDeTimes);
+		for (int i = 0; i < numberOfApplicationData; i++) {
+			setTeamDataOnTargetMatrixWithOffset(i, startOfApplicationData, gamesRandom, outputColumns, mapaDeTimes);
+			setEnemyTeamDataOnTargetMatrixWithOffset(i, startOfApplicationData, gamesRandom, outputColumns, mapaDeTimes);
 		}
 	}
 	
+	private void setTeamDataOnInputMatrixWithOffset(int i, int startOfApplicationData, int[] gamesRandom, int[] inputColumns, Map<String, Sheet> mapaDeTimes) {
+		for (int k = 0; k < inputColumns.length; k++) {
+			Cell cell = mapaDeTimes.get("timeRandom").getCell(inputColumns[k], gamesRandom[i+startOfApplicationData]);
+			inputMatrix[k+1][i] = Double.parseDouble(cell.getContents().replace(',', '.'));
+		}
+	}
 	
+	private void setEnemyTeamDataOnInputMatrixWithOffset(int i, int startOfApplicationData, int[] gamesRandom, int[] inputColumns, Map<String, Sheet> mapaDeTimes) {
+		int offset = inputColumns.length;
+		for (int k = offset; k < offset*2; k++) {
+			Cell enemyCell = mapaDeTimes.get("adversarioRandom").getCell(inputColumns[k-offset], gamesRandom[i+startOfApplicationData]);
+			inputMatrix[k+1][i] = (-1) * Double.parseDouble(enemyCell.getContents().replace(',', '.'));
+		}
+	}
 	
+	private void setTeamDataOnTargetMatrixWithOffset(int i, int startOfApplicationData, int[] gamesRandom, int[] outputColumns, Map<String, Sheet> mapaDeTimes) {
+		for (int k = 0; k < outputColumns.length; k++) {
+			Cell cell = mapaDeTimes.get("timeRandom").getCell(outputColumns[k], gamesRandom[i+startOfApplicationData]);
+			targetMatrix[k][i] = Double.parseDouble(cell.getContents());
+		}
+	}
 	
-	
-	
+	private void setEnemyTeamDataOnTargetMatrixWithOffset(int i, int startOfApplicationData, int[] gamesRandom, int[] outputColumns, Map<String, Sheet> mapaDeTimes) {
+		int offset = outputColumns.length;
+		for (int k = offset; k < offset*2; k++) {
+			Cell enemyCell = mapaDeTimes.get("adversarioRandom").getCell(outputColumns[k-offset], gamesRandom[i+startOfApplicationData]);
+			targetMatrix[k][i] = Double.parseDouble(enemyCell.getContents().replace(',', '.'));
+		}
+	}
 	
 	
 	

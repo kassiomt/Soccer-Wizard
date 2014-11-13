@@ -139,6 +139,9 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTabbedPane1.setMaximumSize(new java.awt.Dimension(1280, 720));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1280, 720));
+
         xorTab.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18))); // NOI18N
 
         chartPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gráfico do erro ao longo das rotinas de treino", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18))); // NOI18N
@@ -192,7 +195,7 @@ public class SoccerGUI extends javax.swing.JFrame {
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(jScrollPane3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1097, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 509, Short.MAX_VALUE)
                 .addGroup(resultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6))
@@ -340,6 +343,7 @@ public class SoccerGUI extends javax.swing.JFrame {
         soccerWizardTab.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Menu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 12))); // NOI18N
 
         chartPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Gráfico do erro ao longo das rotinas de treino", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18))); // NOI18N
+        chartPanel2.setMaximumSize(new java.awt.Dimension(1280, 720));
         chartPanel2.setLayout(new java.awt.BorderLayout());
 
         resultPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resultados", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 18))); // NOI18N
@@ -413,7 +417,7 @@ public class SoccerGUI extends javax.swing.JFrame {
                         .addComponent(jLabel20)
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 651, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -487,7 +491,7 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         inputRotinas1.setText("15000");
 
-        inputLearningRate1.setText("0.05");
+        inputLearningRate1.setText("0.02");
 
         inputErro1.setText("0.1");
 
@@ -507,15 +511,15 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         jLabel28.setText("Rodadas:");
 
-        inputRodadas1Inicial.setText("1");
+        inputRodadas1Inicial.setText("20");
 
         jLabel29.setText("Times:");
 
-        inputTimes1Inicial.setText("1");
+        inputTimes1Inicial.setText("18");
 
         jLabel30.setText("Neurônios:");
 
-        inputHiddenNeurons1.setText("5");
+        inputHiddenNeurons1.setText("2");
 
         botaoRodar1.setText("RODAR");
         botaoRodar1.addActionListener(new java.awt.event.ActionListener() {
@@ -537,19 +541,19 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         inputRodadas2Inicial.setText("21");
 
-        inputTimes2Inicial.setText("1");
+        inputTimes2Inicial.setText("18");
 
         jLabel34.setText("Intervalo de confiabilidade:");
 
         inputConfidenceInterval2.setText("0.3");
 
-        inputRodadas1Final.setText("20");
+        inputRodadas1Final.setText("29");
 
-        inputTimes1Final.setText("20");
+        inputTimes1Final.setText("18");
 
-        inputRodadas2Final.setText("31");
+        inputRodadas2Final.setText("29");
 
-        inputTimes2Final.setText("20");
+        inputTimes2Final.setText("18");
 
         botaoLoad.setText("CARREGAR CAMPEONATO");
         botaoLoad.addActionListener(new java.awt.event.ActionListener() {
@@ -710,11 +714,11 @@ public class SoccerGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -791,15 +795,17 @@ public class SoccerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoLoadActionPerformed
     
     private void botaoInicializar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInicializar2ActionPerformed
-        SoccerWizard.trainingParameters.setLearningRate(Double.parseDouble(inputLearningRate1.getText()));
-        SoccerWizard.trainingParameters.setMaxRotinas(Integer.parseInt(inputRotinas1.getText()));
-        SoccerWizard.trainingParameters.setThresholdError(Double.parseDouble(inputErro1.getText()));
-        SoccerWizard.trainingParameters.setNumTeamsForTraining(Integer.parseInt(inputTimes1Inicial.getText()));
-        SoccerWizard.trainingParameters.setNumTeamsTotalForTraining(Integer.parseInt(inputTimes1Final.getText()));
-        SoccerWizard.trainingParameters.setNumRodadasForTraining(Integer.parseInt(inputRodadas1Inicial.getText()));
-        SoccerWizard.trainingParameters.setNumRodadasTotalForTraining(Integer.parseInt(inputRodadas1Final.getText()));
-        SoccerWizard.trainingParameters.setHiddenNeurons(Integer.parseInt(inputHiddenNeurons1.getText()));
-        
+
+		SoccerWizard.setParametersForTraining(
+				Double.parseDouble(inputLearningRate1.getText()),
+				Integer.parseInt(inputRotinas1.getText()),
+				Double.parseDouble(inputErro1.getText()),
+				Integer.parseInt(inputTimes1Inicial.getText()),
+				Integer.parseInt(inputTimes1Final.getText()),
+				Integer.parseInt(inputRodadas1Inicial.getText()),
+				Integer.parseInt(inputRodadas1Final.getText()),
+				Integer.parseInt(inputHiddenNeurons1.getText()));
+
         System.out.println("Learning Rate, Máximo de Rotinas, Erro Mínimo, Rodadas para treino, Times utilizados e Neurônios intermediários ATUALIZADOS\n");
        
         
@@ -838,24 +844,26 @@ public class SoccerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoTreinar2ActionPerformed
 
     private void botaoInicializar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTreinar3ActionPerformed
-    	SoccerWizard.trainingParameters.setNumTeamsForApplication(Integer.parseInt(inputTimes2Inicial.getText()));
-    	SoccerWizard.trainingParameters.setNumTeamsTotalForApplication(Integer.parseInt(inputTimes2Final.getText()));
-    	SoccerWizard.trainingParameters.setNumRodadasForApplication(Integer.parseInt(inputRodadas2Inicial.getText()));
-    	SoccerWizard.trainingParameters.setNumRodadaTotalForApplication(Integer.parseInt(inputRodadas2Final.getText()));
-        SoccerWizard.trainingParameters.setConfidenceInterval(Double.parseDouble(inputConfidenceInterval2.getText()));
-        System.out.println("Times e Rodadas para aplicação atualizados!\n");
-        JOptionPane.showMessageDialog(rootPane, "Aplicação preparada, agora é só rodar sua rede neural!", "APLICAÇÃO PREPARADA", 1);
+		SoccerWizard.setParametersForApplication(
+				Integer.parseInt(inputTimes2Inicial.getText()),
+				Integer.parseInt(inputTimes2Final.getText()),
+				Integer.parseInt(inputRodadas2Inicial.getText()),
+				Integer.parseInt(inputRodadas2Final.getText()),
+				Double.parseDouble(inputConfidenceInterval2.getText()));
+
+    	System.out.println("Times e Rodadas para aplicação atualizados!\n");
+        JOptionPane.showMessageDialog(rootPane, "Aplicação preparada, agora é só rodar sua Rede Neural Artificial!", "APLICAÇÃO PREPARADA", 1);
     }//GEN-LAST:event_botaoTreinar3ActionPerformed
 
     private void botaoRodar1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
     	SoccerWizard.initializeDataToApplyTrainedNet();
     	FeedforwardAlgorithm result = SoccerWizard.feedforwardAlgorithm();
     	DecimalFormat df = new DecimalFormat("00.00%");
-    	jTextPaneWinRatio.setText( String.valueOf(df.format(result.getWinSuccessRatio())) );
-    	jTextPaneDrawRatio.setText( String.valueOf(df.format(result.getDrawSuccessRatio())) );
-    	jTextPaneLoseRatio.setText( String.valueOf(df.format(result.getLoseSuccessRatio())) );
+    	jTextPaneWinRatio.setText( String.valueOf(df.format(result.getErrorAnalysis().getWinSuccessRatio())) );
+    	jTextPaneDrawRatio.setText( String.valueOf(df.format(result.getErrorAnalysis().getDrawSuccessRatio())) );
+    	jTextPaneLoseRatio.setText( String.valueOf(df.format(result.getErrorAnalysis().getLoseSuccessRatio())) );
 //    	jTextPaneAnyRatio.setText( String.valueOf(df.format(result.getAnyoneSuccessRatio())) );
-    	jTextPaneAllRatio.setText( String.valueOf(df.format(result.getBothSuccessRatio())) );
+    	jTextPaneAllRatio.setText( String.valueOf(df.format(result.getErrorAnalysis().getOverallSuccessRatio())) );
     	System.out.println("APLICAÇÃO EXECUTADA!\n");
         JOptionPane.showMessageDialog(rootPane, "Aplicação executada!", "APLICAÇÃO EXECUTADA", 1);
     }

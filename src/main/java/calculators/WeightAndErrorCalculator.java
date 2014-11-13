@@ -3,8 +3,7 @@ package calculators;
 import java.util.Arrays;
 
 public class WeightAndErrorCalculator {
-	public static double[][] updateWeights(double[][] oldBias,
-			double[][] correctionTerm) {
+	public static double[][] updateWeights(double[][] oldBias, double[][] correctionTerm) {
 		double[][] newBias = new double[oldBias.length][oldBias[0].length];
 		for (int i = 0; i < oldBias.length; i++) {
 			for (int j = 0; j < oldBias[0].length; j++) {
@@ -14,8 +13,7 @@ public class WeightAndErrorCalculator {
 		return newBias;
 	}
 
-	public static double squaredError(double[] lastLayerOut,
-			double[][] targetMatrix, int patternCounter) {
+	public static double squaredError(double[] lastLayerOut, double[][] targetMatrix, int patternCounter) {
 		double error = 0;
 		for (int i = 0; i < targetMatrix.length; i++) {
 			double base = targetMatrix[i][patternCounter] - lastLayerOut[i];
