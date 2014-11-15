@@ -2,6 +2,8 @@ package resolvers;
 
 import org.jfree.data.xy.XYSeries;
 
+import Initializer.Initializer;
+import Parameters.ParametersForTraining;
 import calculators.BackpropagationCalculator;
 import calculators.BiasInitializator;
 import calculators.FeedforwardCalculator;
@@ -14,76 +16,76 @@ public class BackPropagationAlgorithm {
 	private XYSeries maxErrorChartData;
 	private XYSeries minErrorChartData;
 	private XYSeries averageErrorChartData;
-    private double maxError;
-    private double minError;
-    private double averageError;
-    private int rotinas;
+	private double maxError;
+	private double minError;
+	private double averageError;
+	private int rotinas;
 
-	public BackPropagationAlgorithm(Initializer initializedData, double learningRate, double thresholdError, int maxRotinas) {
+	public BackPropagationAlgorithm(Initializer initializedData, ParametersForTraining.Modifiers modifiers) {
 
-	// STEP 0
-	// initialize weights
-	setHiddenBias(BiasInitializator.hiddenBias(initializedData.getInputMatrix(), initializedData.getHiddenNeurons()));
-	setOutputBias(BiasInitializator.outputBias(initializedData.getHiddenNeurons(), initializedData.getOutputMatrix()));
-	
-	// STEP 1	
-	setMaxErrorChartData(new XYSeries("MaxError"));
-	setMinErrorChartData(new XYSeries("MinError"));
-	setAverageErrorChartData(new XYSeries("AverageError"));
-    setMaxError(1);
-    setMinError(1);
-    setAverageError(1);
-    setRotinas(0);
-	
-	while (getMaxError() > thresholdError && getRotinas() < maxRotinas) {
-		// STEP 2
-		double[] epochError = new double[initializedData.getInputMatrix()[0].length];
-		for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
-			// Feedforward
-			// STEP 3
-			double[] firstLayer = FeedforwardCalculator.receivesInputSignal(initializedData.getInputMatrix(), l);
+		// STEP 0
+		// initialize weights
+		setHiddenBias(BiasInitializator.hiddenBias(initializedData.getInputMatrix(), initializedData.getHiddenNeurons()));
+		setOutputBias(BiasInitializator.outputBias(initializedData.getHiddenNeurons(), initializedData.getOutputMatrix()));
 
-			// STEP 4
-			double[] hiddenLayerIn = FeedforwardCalculator.weightedInputSignal(firstLayer, getHiddenBias());
-			double[] hiddenLayerOut = FeedforwardCalculator.bipolarSigmoidActivationFunction(hiddenLayerIn);
-			hiddenLayerOut[0] = 1;
+		// STEP 1
+		setMaxErrorChartData(new XYSeries("MaxError"));
+		setMinErrorChartData(new XYSeries("MinError"));
+		setAverageErrorChartData(new XYSeries("AverageError"));
+		setMaxError(1);
+		setMinError(1);
+		setAverageError(1);
+		setRotinas(0);
 
-			// STEP 5
-			double[] lastLayerIn = FeedforwardCalculator.weightedInputSignal(hiddenLayerOut, getOutputBias());
-			double[] lastLayerOut = FeedforwardCalculator.bipolarSigmoidActivationFunction(lastLayerIn);
+		while (getMaxError() > modifiers.getThresholdError() && getRotinas() < modifiers.getMaxRotinas()) {
+			// STEP 2
+			double[] epochError = new double[initializedData.getInputMatrix()[0].length];
+			for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
+				// Feedforward
+				// STEP 3
+				double[] firstLayer = FeedforwardCalculator.receivesInputSignal(initializedData.getInputMatrix(), l);
 
-			// Backpropagation of Error
-			// STEP 6
-			double[] outDerivative = BackpropagationCalculator.bipolarSigmoidDerivative(lastLayerOut);
-			double[] outError = BackpropagationCalculator.outErrorInformationTerm(initializedData.getTargetMatrix(), l, lastLayerOut, outDerivative);
-			double[][] outCorrection = BackpropagationCalculator.weightCorrectionTerm(learningRate, outError, hiddenLayerOut);
+				// STEP 4
+				double[] hiddenLayerIn = FeedforwardCalculator.weightedInputSignal(firstLayer, getHiddenBias());
+				double[] hiddenLayerOut = FeedforwardCalculator.bipolarSigmoidActivationFunction(hiddenLayerIn);
+				hiddenLayerOut[0] = 1;
 
-			// STEP 7
-			double[] midDeltaInput = BackpropagationCalculator.backwardsWeightedInputSignal(outError, getOutputBias());
-			double[] midDerivative = BackpropagationCalculator.bipolarSigmoidDerivative(hiddenLayerOut);
-			double[] midError = BackpropagationCalculator.midErrorInformationTerm(midDeltaInput, midDerivative);
-			double[][] midCorrection = BackpropagationCalculator.weightCorrectionTerm(learningRate, midError, firstLayer);
+				// STEP 5
+				double[] lastLayerIn = FeedforwardCalculator.weightedInputSignal(hiddenLayerOut, getOutputBias());
+				double[] lastLayerOut = FeedforwardCalculator.bipolarSigmoidActivationFunction(lastLayerIn);
 
+				// Backpropagation of Error
+				// STEP 6
+				double[] outDerivative = BackpropagationCalculator.bipolarSigmoidDerivative(lastLayerOut);
+				double[] outError = BackpropagationCalculator.outErrorInformationTerm(initializedData.getTargetMatrix(), l, lastLayerOut,
+						outDerivative);
+				double[][] outCorrection = BackpropagationCalculator.weightCorrectionTerm(modifiers.getLearningRate(), outError, hiddenLayerOut);
 
-			// Update weights and biases
-			// STEP 8
-			setOutputBias(WeightAndErrorCalculator.updateWeights(getOutputBias(), outCorrection));
-			setHiddenBias(WeightAndErrorCalculator.updateWeights(getHiddenBias(), midCorrection));
+				// STEP 7
+				double[] midDeltaInput = BackpropagationCalculator.backwardsWeightedInputSignal(outError, getOutputBias());
+				double[] midDerivative = BackpropagationCalculator.bipolarSigmoidDerivative(hiddenLayerOut);
+				double[] midError = BackpropagationCalculator.midErrorInformationTerm(midDeltaInput, midDerivative);
+				double[][] midCorrection = BackpropagationCalculator.weightCorrectionTerm(modifiers.getLearningRate(), midError, firstLayer);
 
-			// Error calculation
-			epochError[l] = WeightAndErrorCalculator.squaredError(lastLayerOut, initializedData.getTargetMatrix(), l);
+				// Update weights and biases
+				// STEP 8
+				setOutputBias(WeightAndErrorCalculator.updateWeights(getOutputBias(), outCorrection));
+				setHiddenBias(WeightAndErrorCalculator.updateWeights(getHiddenBias(), midCorrection));
+
+				// Error calculation
+				epochError[l] = WeightAndErrorCalculator.squaredError(lastLayerOut, initializedData.getTargetMatrix(), l);
+			}
+
+			setMaxError(WeightAndErrorCalculator.getMaxError(epochError));
+			setMinError(WeightAndErrorCalculator.getMinError(epochError));
+			setAverageError(WeightAndErrorCalculator.getAverageError(epochError));
+			setRotinas(rotinas + 1);
+			getMaxErrorChartData().add(rotinas, maxError);
+			getMinErrorChartData().add(rotinas, minError);
+			getAverageErrorChartData().add(rotinas, averageError);
 		}
 
-		setMaxError(WeightAndErrorCalculator.getMaxError(epochError));
-		setMinError(WeightAndErrorCalculator.getMinError(epochError));
-		setAverageError(WeightAndErrorCalculator.getAverageError(epochError));
-		setRotinas(rotinas+1);
-		getMaxErrorChartData().add(rotinas, maxError);
-		getMinErrorChartData().add(rotinas, minError);
-		getAverageErrorChartData().add(rotinas, averageError);
-	}
-
-	System.out.format("Treinamento concluido com sucesso após:%n%d rotinas%ne com:%n%f de erro máximo%n%n", rotinas, maxError);
+		System.out.format("Treinamento concluido com sucesso após:%n%d rotinas%ne com:%n%f de erro máximo%n%n", rotinas, maxError);
 
 	}
 

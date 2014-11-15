@@ -1,0 +1,52 @@
+package Initializer;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import jxl.Sheet;
+import Parameters.ParametersForTraining;
+
+public class InitializerForTraining extends Initializer {
+
+	public InitializerForTraining(ParametersForTraining.Structure parameters, Map<String, Sheet> mapaDeTimes) {
+
+		int[] inputColumns = useThisColumnsOfExcelTable();
+		int[] outputColumns = outputDataColumns();
+
+		setGamesRandom(createRandomizedRows(parameters.getNumRodadasTotal(), parameters.getNumTeamsTotal()));
+		int numberOfTrainingData = parameters.getNumTeams() * parameters.getNumRodadas();
+
+		setInputMatrix(0, numberOfTrainingData, getGamesRandom(), inputColumns, mapaDeTimes);
+
+		setHiddenNeurons(new double[parameters.getHiddenNeurons()]);
+
+		setOutputMatrix(new double[outputColumns.length * 2][numberOfTrainingData]);
+
+		setTargetMatrix(0, numberOfTrainingData, getGamesRandom(), outputColumns, mapaDeTimes);
+	}
+
+	protected int[] createRandomizedRows(int totalRodadas, int totalTeams) {
+		int[] gamesRandom = new int[totalRodadas * totalTeams];
+
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 1; i <= gamesRandom.length; i++)
+			list.add(i);
+
+		Collections.shuffle(list);
+		for (int i = 0; i < gamesRandom.length; i++)
+			gamesRandom[i] = list.get(i);
+
+		return gamesRandom;
+	}
+
+	public int[] getGamesRandom() {
+		return gamesRandom;
+	}
+
+	public void setGamesRandom(int[] gamesRandom) {
+		this.gamesRandom = gamesRandom;
+	}
+
+}

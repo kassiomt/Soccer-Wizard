@@ -1,8 +1,11 @@
-package kassio.soccer_wizard;
+package Parameters;
+
 
 public class ParametersForApplication extends Parameters {
 
 	private double confidenceInterval;
+	private Structure structure;
+	private Modifiers modifiers;
 
 	public ParametersForApplication(int numTeams, int numTeamsTotal,
 			int numRodadas, int numRodadasTotal, double confidenceInterval) {
@@ -13,6 +16,32 @@ public class ParametersForApplication extends Parameters {
 		setConfidenceInterval(confidenceInterval);
 	}
 
+	public class Structure {
+
+		public int getNumRodadas() {
+			return numRodadas;
+		}
+
+		public int getNumRodadasTotal() {
+			return numRodadasTotal;
+		}
+
+		public int getNumTeams() {
+			return numTeams;
+		}
+
+		public int getNumTeamsTotal() {
+			return numTeamsTotal;
+		}
+	}
+	
+	public class Modifiers {
+		public double getConfidenceInterval() {
+			return confidenceInterval;
+		}
+
+	}
+	
 	public double getConfidenceInterval() {
 		return confidenceInterval;
 	}
@@ -21,4 +50,11 @@ public class ParametersForApplication extends Parameters {
 		this.confidenceInterval = confidenceInterval;
 	}
 
+	public Structure getStructure() {
+		return structure;
+	}
+	
+	public Modifiers getModifiers() {
+		return modifiers;
+	}
 }

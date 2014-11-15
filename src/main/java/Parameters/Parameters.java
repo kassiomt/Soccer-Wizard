@@ -1,11 +1,11 @@
-package kassio.soccer_wizard;
+package Parameters;
 
 public abstract class Parameters {
 
-	private int numRodadas;
-	private int numRodadasTotal;
-	private int numTeams;
-	private int numTeamsTotal;
+	int numRodadas;
+	int numRodadasTotal;
+	int numTeams;
+	int numTeamsTotal;
 
 	public int getNumRodadas() {
 		return numRodadas;

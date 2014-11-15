@@ -856,7 +856,7 @@ public class SoccerGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoTreinar3ActionPerformed
 
     private void botaoRodar1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-    	SoccerWizard.initializeDataToApplyTrainedNet();
+    	SoccerWizard.initializeDataForApplication();
     	FeedforwardAlgorithm result = SoccerWizard.feedforwardAlgorithm();
     	DecimalFormat df = new DecimalFormat("00.00%");
     	jTextPaneWinRatio.setText( String.valueOf(df.format(result.getErrorAnalysis().getWinSuccessRatio())) );

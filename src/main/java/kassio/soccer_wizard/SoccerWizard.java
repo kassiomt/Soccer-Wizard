@@ -6,7 +6,13 @@ import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import resolvers.BackPropagationAlgorithm;
 import resolvers.FeedforwardAlgorithm;
-import resolvers.Initializer;
+import Initializer.Initializer;
+import Initializer.InitializerForApplication;
+import Initializer.InitializerForTraining;
+import Initializer.XoRInitializer;
+import Parameters.Parameters;
+import Parameters.ParametersForApplication;
+import Parameters.ParametersForTraining;
 import SoccerGUI.SoccerGUI;
 
 
@@ -16,7 +22,7 @@ public class SoccerWizard {
     public static ParametersForApplication applicationParameters;
     public static Initializer dataForTraining;
 	public static BackPropagationAlgorithm bias;
-	public static Initializer dataForApplication;
+	public static InitializerForApplication dataForApplication;
 
 	public static TeamsMapBuilder teamsMapBuilt;
     
@@ -29,32 +35,27 @@ public class SoccerWizard {
 	}
 	
 	public static Initializer initializeDataXorForTraining() {
-		return dataForTraining = new Initializer();
+		return dataForTraining = new XoRInitializer();
 	}
 	
-	public static ParametersForTraining setParametersForTraining(double learningRate, int maxRotinas, double thresholdError, int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, int hiddenNeurons) {
+	public static Parameters setParametersForTraining(double learningRate, int maxRotinas, double thresholdError, int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, int hiddenNeurons) {
 		return trainingParameters = new ParametersForTraining(learningRate, maxRotinas, thresholdError, numTeams, numTeamsTotal, numRodadas, numRodadasTotal, hiddenNeurons);
 	}
 	
 	public static Initializer initializeDataForTraining() {
-		return dataForTraining = new Initializer(trainingParameters.getNumTeams(),
-				trainingParameters.getNumTeamsTotal(), trainingParameters.getNumRodadas(),
-				trainingParameters.getNumRodadasTotal(), trainingParameters.getHiddenNeurons(), 
-				teamsMapBuilt.getTeamsMap());
+		return dataForTraining = new InitializerForTraining(trainingParameters.getStructure(), teamsMapBuilt.getTeamsMap());
 	}
 	
-	public static ParametersForApplication setParametersForApplication(int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, double confidenceInterval) {
+	public static Parameters setParametersForApplication(int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, double confidenceInterval) {
 		return applicationParameters = new ParametersForApplication(numTeams, numTeamsTotal, numRodadas, numRodadasTotal, confidenceInterval);
 	}
 	
-	public static Initializer initializeDataToApplyTrainedNet(){
-		return dataForApplication = new Initializer(applicationParameters.getNumTeams(),
-				applicationParameters.getNumTeamsTotal(), applicationParameters.getNumRodadas(),
-				applicationParameters.getNumRodadasTotal(), teamsMapBuilt.getTeamsMap(), dataForTraining.getGamesRandom());
+	public static Initializer initializeDataForApplication(){
+		return dataForApplication = new InitializerForApplication(applicationParameters.getStructure(), teamsMapBuilt.getTeamsMap(), dataForTraining.getGamesRandom());
 	}
 	
 	public static BackPropagationAlgorithm backPropagationAlgorithm() {
-		return bias = new BackPropagationAlgorithm(dataForTraining, trainingParameters.getLearningRate(), trainingParameters.getThresholdError(), trainingParameters.getMaxRotinas());
+		return bias = new BackPropagationAlgorithm(dataForTraining, trainingParameters.getModifiers());
 	}
 	
 	public static FeedforwardAlgorithm xorFeedforwardAlgorithm() {
@@ -62,7 +63,7 @@ public class SoccerWizard {
 	}
 	
 	public static FeedforwardAlgorithm feedforwardAlgorithm() {
-		return new FeedforwardAlgorithm(dataForApplication, bias, applicationParameters.getConfidenceInterval());
+		return new FeedforwardAlgorithm(dataForApplication, bias, applicationParameters.getModifiers().getConfidenceInterval());
 	}
 	
 	public static TeamsMapBuilder buildTeams(Workbook workbook){
