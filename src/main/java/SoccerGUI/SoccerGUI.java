@@ -725,9 +725,9 @@ public class SoccerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoInicializarXoRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInicializarActionPerformed
-        SoccerWizard.trainingParameters.setLearningRate(Double.parseDouble(inputLearningRate.getText()));
-        SoccerWizard.trainingParameters.setMaxRotinas(Integer.parseInt(inputRotinas.getText()));
-        SoccerWizard.trainingParameters.setThresholdError(Double.parseDouble(inputErro.getText()));
+		SoccerWizard.setParametersForTraining(Double.parseDouble(inputLearningRate.getText()), Integer.parseInt(inputRotinas.getText()),
+				Double.parseDouble(inputErro.getText()), 2, 2, 2, 2, 5);
+
         System.out.println("Learning Rate, Máximo de Rotinas e Erro Mínimo ATUALIZADOS\n");
         
         SoccerWizard.initializeDataXorForTraining();

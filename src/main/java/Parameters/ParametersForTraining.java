@@ -11,14 +11,16 @@ public class ParametersForTraining extends Parameters {
 
 	public ParametersForTraining(double learningRate, int maxRotinas, double thresholdError, int numTeams, int numTeamsTotal, int numRodadas,
 			int numRodadasTotal, int hiddenNeurons) {
-		setLearningRate(learningRate);
-		setNumTeams(numTeams);
-		setMaxRotinas(maxRotinas);
-		setThresholdError(thresholdError);
-		setNumTeamsTotal(numTeamsTotal);
-		setNumRodadas(numRodadas);
-		setNumRodadasTotal(numRodadasTotal);
-		setHiddenNeurons(hiddenNeurons);
+		this.learningRate = learningRate;
+		this.numTeams = numTeams;
+		this.maxRotinas = maxRotinas;
+		this.thresholdError = thresholdError;
+		this.numTeamsTotal = numTeamsTotal;
+		this.numRodadas = numRodadas;
+		this.numRodadasTotal = numRodadasTotal;
+		this.hiddenNeurons = hiddenNeurons;
+		this.structure = new Structure();
+		this.modifiers = new Modifiers();
 	}
 
 	public class Structure {
@@ -56,22 +58,6 @@ public class ParametersForTraining extends Parameters {
 			return thresholdError;
 		}
 
-	}
-
-	public void setLearningRate(double learningRate) {
-		this.learningRate = learningRate;
-	}
-
-	public void setMaxRotinas(int maxRotinas) {
-		this.maxRotinas = maxRotinas;
-	}
-
-	public void setThresholdError(double thresholdError) {
-		this.thresholdError = thresholdError;
-	}
-
-	public void setHiddenNeurons(int hiddenNeurons) {
-		this.hiddenNeurons = hiddenNeurons;
 	}
 
 	public Structure getStructure() {

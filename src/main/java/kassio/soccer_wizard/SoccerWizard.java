@@ -22,7 +22,7 @@ public class SoccerWizard {
     public static ParametersForApplication applicationParameters;
     public static Initializer dataForTraining;
 	public static BackPropagationAlgorithm bias;
-	public static InitializerForApplication dataForApplication;
+	public static Initializer dataForApplication;
 
 	public static TeamsMapBuilder teamsMapBuilt;
     

@@ -12,19 +12,19 @@ public class InitializerForTraining extends Initializer {
 
 	public InitializerForTraining(ParametersForTraining.Structure parameters, Map<String, Sheet> mapaDeTimes) {
 
-		int[] inputColumns = useThisColumnsOfExcelTable();
-		int[] outputColumns = outputDataColumns();
+		setInputColumns(useThisColumnsOfExcelTable());
+		setOutputColumns(outputDataColumns());
 
 		setGamesRandom(createRandomizedRows(parameters.getNumRodadasTotal(), parameters.getNumTeamsTotal()));
 		int numberOfTrainingData = parameters.getNumTeams() * parameters.getNumRodadas();
 
-		setInputMatrix(0, numberOfTrainingData, getGamesRandom(), inputColumns, mapaDeTimes);
+		setInputMatrix(0, numberOfTrainingData, getGamesRandom(), getInputColumns(), mapaDeTimes);
 
 		setHiddenNeurons(new double[parameters.getHiddenNeurons()]);
 
-		setOutputMatrix(new double[outputColumns.length * 2][numberOfTrainingData]);
+		setOutputMatrix(new double[getOutputColumns().length * 2][numberOfTrainingData]);
 
-		setTargetMatrix(0, numberOfTrainingData, getGamesRandom(), outputColumns, mapaDeTimes);
+		setTargetMatrix(0, numberOfTrainingData, getGamesRandom(), getOutputColumns(), mapaDeTimes);
 	}
 
 	protected int[] createRandomizedRows(int totalRodadas, int totalTeams) {

@@ -1,5 +1,9 @@
 package resolvers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import Initializer.Initializer;
 import calculators.FeedforwardCalculator;
 
@@ -37,9 +41,41 @@ public class FeedforwardAlgorithm {
 
 		}
 
-		setErrorAnalysis(new ApplicationErrorAnalysis(initializedData, confidenceInterval, lastLayerOutMatrix, target));
+		setErrorAnalysis(new ApplicationErrorAnalysis(confidenceInterval, lastLayerOutMatrix, target));
+		try {
+			exportResultsToCSV(lastLayerOutMatrix, target);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		System.out.println("Aplicação terminada");
+	}
+
+	private void exportResultsToCSV(double[][] lastLayerOutMatrix, double[][] target) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Exported Results.csv"));
+		int neuronCounter = 0;
+		for (double[] neuron : lastLayerOutMatrix) {
+			neuronCounter++;
+			bw.append("OutMatrix" + neuronCounter + ",");
+			for (double result : neuron) {
+				bw.append(Double.toString(result));
+				bw.append(",");				
+			}
+			bw.newLine();
+		}
+		neuronCounter = 0;
+		for (double[] neuron : target) {
+			neuronCounter++;
+			bw.append("TargetMatrix" + neuronCounter + ",");
+			for (double result : neuron) {
+				bw.append(Double.toString(result));
+				bw.append(",");				
+			}
+			bw.newLine();
+		}
+		
+		bw.close();		
 	}
 
 	public FeedforwardAlgorithm(BackPropagationAlgorithm bias) {

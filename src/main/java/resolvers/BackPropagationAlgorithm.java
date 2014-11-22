@@ -1,5 +1,11 @@
 package resolvers;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.jfree.data.xy.XYSeries;
 
 import Initializer.Initializer;
@@ -19,10 +25,28 @@ public class BackPropagationAlgorithm {
 	private double maxError;
 	private double minError;
 	private double averageError;
+	private double[] epochError;
 	private int rotinas;
 
 	public BackPropagationAlgorithm(Initializer initializedData, ParametersForTraining.Modifiers modifiers) {
 
+		trainingIteration(initializedData, modifiers, false);
+
+		initializedData = removeTrashData(initializedData, epochError);
+
+		trainingIteration(initializedData, modifiers, true);
+
+		try {
+			exportInputAndErrorToCSV(epochError, initializedData.getInputMatrix());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.format("Treinamento concluido com sucesso após:%n%d rotinas%ne com:%n%f de erro máximo%n%n", rotinas, maxError);
+
+	}
+
+	private void trainingIteration(Initializer initializedData, ParametersForTraining.Modifiers modifiers, boolean isFinalTraining) {
 		// STEP 0
 		// initialize weights
 		setHiddenBias(BiasInitializator.hiddenBias(initializedData.getInputMatrix(), initializedData.getHiddenNeurons()));
@@ -39,7 +63,7 @@ public class BackPropagationAlgorithm {
 
 		while (getMaxError() > modifiers.getThresholdError() && getRotinas() < modifiers.getMaxRotinas()) {
 			// STEP 2
-			double[] epochError = new double[initializedData.getInputMatrix()[0].length];
+			epochError = new double[initializedData.getInputMatrix()[0].length];
 			for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
 				// Feedforward
 				// STEP 3
@@ -76,17 +100,91 @@ public class BackPropagationAlgorithm {
 				epochError[l] = WeightAndErrorCalculator.squaredError(lastLayerOut, initializedData.getTargetMatrix(), l);
 			}
 
-			setMaxError(WeightAndErrorCalculator.getMaxError(epochError));
-			setMinError(WeightAndErrorCalculator.getMinError(epochError));
-			setAverageError(WeightAndErrorCalculator.getAverageError(epochError));
 			setRotinas(rotinas + 1);
-			getMaxErrorChartData().add(rotinas, maxError);
-			getMinErrorChartData().add(rotinas, minError);
-			getAverageErrorChartData().add(rotinas, averageError);
+			if (isFinalTraining) {
+				setErrors();
+				getChartInfo();
+			}
+		}
+	}
+
+	private void setErrors() {
+		setMaxError(WeightAndErrorCalculator.getMaxError(epochError));
+		setMinError(WeightAndErrorCalculator.getMinError(epochError));
+		setAverageError(WeightAndErrorCalculator.getAverageError(epochError));
+	}
+
+	private void getChartInfo() {
+		getMaxErrorChartData().add(rotinas, maxError);
+		getMinErrorChartData().add(rotinas, minError);
+		getAverageErrorChartData().add(rotinas, averageError);
+	}
+
+	private Initializer removeTrashData(Initializer initializedData, double[] originalError) {
+		double[][] newInputMatrix = initializedData.getInputMatrix();
+		double[][] newOutputMatrix = initializedData.getOutputMatrix();
+		double[][] newTargetMatrix = initializedData.getTargetMatrix();
+		double[] error = originalError.clone();
+
+		int numberOfElementsToRemove = (int) Math.round(error.length * 0.05);
+		int[] indexesToRemove = new int[numberOfElementsToRemove];
+		Arrays.sort(error);
+
+		for (int i = 0; i < numberOfElementsToRemove; i++) {
+			for (int j = 0; j < originalError.length; j++) {
+				if (error[error.length - 1 - i] == originalError[j]) {
+					indexesToRemove[i] = j;
+				}
+			}
 		}
 
-		System.out.format("Treinamento concluido com sucesso após:%n%d rotinas%ne com:%n%f de erro máximo%n%n", rotinas, maxError);
+		Arrays.sort(indexesToRemove);
+		for (int i = indexesToRemove.length-1; i >=0; i--) {
+			originalError = ArrayUtils.remove(originalError, indexesToRemove[i]);
+			for (int j = 0; j < newInputMatrix.length; j++) {
+				double[] newInputMatrixArray = newInputMatrix[j];
+				newInputMatrixArray = ArrayUtils.remove(newInputMatrixArray, indexesToRemove[i]);
+				newInputMatrix[j] = newInputMatrixArray;
+			}
+			for (int j = 0; j < newOutputMatrix.length; j++) {
+				double[] newOutputMatrixArray = newOutputMatrix[j];
+				newOutputMatrixArray = ArrayUtils.remove(newOutputMatrixArray, indexesToRemove[i]);
+				newOutputMatrix[j] = newOutputMatrixArray;
+			}
+			for (int j = 0; j < newTargetMatrix.length; j++) {
+				double[] newTargetMatrixArray = newTargetMatrix[j];
+				newTargetMatrixArray = ArrayUtils.remove(newTargetMatrixArray, indexesToRemove[i]);
+				newTargetMatrix[j] = newTargetMatrixArray;
+			}
+		}
 
+		initializedData.setInputMatrix(newInputMatrix);
+		initializedData.setOutputMatrix(newOutputMatrix);
+		initializedData.setTargetMatrix(newTargetMatrix);
+
+		return initializedData;
+	}
+
+	private void exportInputAndErrorToCSV(double[] error, double[][] inputMatrix) throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter("Exported Errors.csv"));
+		bw.append("Error,");
+		for (double result : error) {
+			bw.append(Double.toString(result));
+			bw.append(",");
+		}
+		bw.newLine();
+		int neuronCounter = 0;
+		for (double[] neuron : inputMatrix) {
+			neuronCounter++;
+			bw.append("InputMatrix" + neuronCounter + ",");
+			for (double result : neuron) {
+				bw.append(Double.toString(result));
+				bw.append(",");
+			}
+			bw.newLine();
+		}
+
+		bw.close();
 	}
 
 	public double[][] getOutputBias() {

@@ -1,6 +1,6 @@
 package Initializer;
 
-public class XoRInitializer extends Initializer{
+public class XoRInitializer extends Initializer {
 	
 	public XoRInitializer() {
 		
@@ -14,14 +14,6 @@ public class XoRInitializer extends Initializer{
 		setTargerMatrix();
 	}
 
-	private void setTargerMatrix() {
-		targetMatrix = new double[1][4];
-		targetMatrix[0][0] = -1;
-		targetMatrix[0][1] = 1;
-		targetMatrix[0][2] = 1;
-		targetMatrix[0][3] = -1;
-	}
-
 	private void setInputMatrix() {
 		inputMatrix = new double [3][4];
 		
@@ -29,6 +21,14 @@ public class XoRInitializer extends Initializer{
 		inputMatrix[0][1] = 1;		inputMatrix[1][1] = 0;		inputMatrix[2][1] = 1;
 		inputMatrix[0][2] = 1;		inputMatrix[1][2] = 1;		inputMatrix[2][2] = 0;
 		inputMatrix[0][3] = 1;		inputMatrix[1][3] = 1;		inputMatrix[2][3] = 1;		
+	}
+	
+	private void setTargerMatrix() {
+		setTargetMatrix(new double[1][4]);
+		getTargetMatrix()[0][0] = -1;
+		getTargetMatrix()[0][1] = 1;
+		getTargetMatrix()[0][2] = 1;
+		getTargetMatrix()[0][3] = -1;
 	}
 
 	public int[] getGamesRandom() {

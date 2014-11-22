@@ -1,32 +1,31 @@
 package resolvers;
 
-import Initializer.Initializer;
-
 public class ApplicationErrorAnalysis {
 
 	private double winSuccessRatio;
 	private double drawSuccessRatio;
 	private double loseSuccessRatio;
 	private double overallSuccessRatio;
-	private double[][] winFailureMatrix;
-	private double[][] drawFailureMatrix;
-	private double[][] loseFailureMatrix;
+	// private double[][] winFailureMatrix;
+	// private double[][] drawFailureMatrix;
+	// private double[][] loseFailureMatrix;
 	private int numberOfWinPrediction;
 	private int numberOfDrawPrediction;
 	private int numberOfLosePrediction;
+	private int numberOfWinSuccessPredictions = 0;
+	private int numberOfDrawSuccessPredictions = 0;
+	private int numberOfLoseSuccessPredictions = 0;
 	private int numberOfWinResults;
 	private int numberOfDrawResults;
 	private int numberOfLoseResults;
-	private int numberOfSuccessWinPredictions = 0;
-	private int numberOfSuccessDrawPredictions = 0;
-	private int numberOfSuccessLosePredictions = 0;
+	private int bothfalse = 0;
 
-	public ApplicationErrorAnalysis(Initializer initializedData, double confidenceInterval, double[][] lastLayerOutMatrix, double[][] target) {
-		setWinFailureMatrix(new double[target.length][target[0].length]);
-		setDrawFailureMatrix(new double[target.length][target[0].length]);
-		setLoseFailureMatrix(new double[target.length][target[0].length]);
+	public ApplicationErrorAnalysis(double confidenceInterval, double[][] lastLayerOutMatrix, double[][] target) {
+		// setWinFailureMatrix(new double[target.length][target[0].length]);
+		// setDrawFailureMatrix(new double[target.length][target[0].length]);
+		// setLoseFailureMatrix(new double[target.length][target[0].length]);
 
-		for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
+		for (int l = 0; l < lastLayerOutMatrix[0].length; l++) {
 			thirdErrorCalculation(lastLayerOutMatrix, target, l);
 		}
 
@@ -70,6 +69,9 @@ public class ApplicationErrorAnalysis {
 		predictionIsDraw = isDrawBiggerThanOthers(lastLayerOut, l, predictionIsDraw);
 		predictionIsLose = isLoseBiggerThanOthers(lastLayerOut, l, predictionIsLose);
 
+		if (predictionIsWin || predictionIsDraw || predictionIsLose) {
+			bothfalse += bothfalse;
+		}
 		checkWinResult(target, l, predictionIsWin);
 		checkDrawResult(target, l, predictionIsDraw);
 		checkLoseResult(target, l, predictionIsLose);
@@ -77,23 +79,29 @@ public class ApplicationErrorAnalysis {
 
 	private boolean isWinBiggerThanOthers(double[][] lastLayerOut, int l, boolean predictionIsWin) {
 		if ((lastLayerOut[0][l] > lastLayerOut[1][l] && lastLayerOut[0][l] > lastLayerOut[2][l])
-				&& (lastLayerOut[5][l] > lastLayerOut[3][l] && lastLayerOut[5][l] > lastLayerOut[4][l]))
+				&& (lastLayerOut[5][l] > lastLayerOut[3][l] && lastLayerOut[5][l] > lastLayerOut[4][l])) {
 			setNumberOfWinPrediction(getNumberOfWinPrediction() + 1);
-		return predictionIsWin = true;
+			return predictionIsWin = true;
+		}
+		return false;
 	}
 
 	private boolean isDrawBiggerThanOthers(double[][] lastLayerOut, int l, boolean predictionIsDraw) {
 		if ((lastLayerOut[1][l] > lastLayerOut[0][l] && lastLayerOut[1][l] > lastLayerOut[2][l])
-				&& (lastLayerOut[4][l] > lastLayerOut[3][l] && lastLayerOut[4][l] > lastLayerOut[5][l]))
+				&& (lastLayerOut[4][l] > lastLayerOut[3][l] && lastLayerOut[4][l] > lastLayerOut[5][l])) {
 			setNumberOfDrawPrediction(getNumberOfDrawPrediction() + 1);
-		return predictionIsDraw = true;
+			return predictionIsDraw = true;
+		}
+		return false;
 	}
 
 	private boolean isLoseBiggerThanOthers(double[][] lastLayerOut, int l, boolean predictionIsLose) {
 		if ((lastLayerOut[2][l] > lastLayerOut[0][l] && lastLayerOut[2][l] > lastLayerOut[1][l])
-				&& (lastLayerOut[3][l] > lastLayerOut[4][l] && lastLayerOut[3][l] > lastLayerOut[5][l]))
+				&& (lastLayerOut[3][l] > lastLayerOut[4][l] && lastLayerOut[3][l] > lastLayerOut[5][l])) {
 			setNumberOfLosePrediction(getNumberOfLosePrediction() + 1);
-		return predictionIsLose = true;
+			return predictionIsLose = true;
+		}
+		return false;
 	}
 
 	private void checkWinResult(double[][] target, int l, boolean isWin) {
@@ -182,29 +190,29 @@ public class ApplicationErrorAnalysis {
 		this.overallSuccessRatio = overallSuccessRatio;
 	}
 
-	public double[][] getWinFailureMatrix() {
-		return winFailureMatrix;
-	}
-
-	public void setWinFailureMatrix(double[][] winFailureMatrix) {
-		this.winFailureMatrix = winFailureMatrix;
-	}
-
-	public double[][] getDrawFailureMatrix() {
-		return drawFailureMatrix;
-	}
-
-	public void setDrawFailureMatrix(double[][] drawFailureMatrix) {
-		this.drawFailureMatrix = drawFailureMatrix;
-	}
-
-	public double[][] getLoseFailureMatrix() {
-		return loseFailureMatrix;
-	}
-
-	public void setLoseFailureMatrix(double[][] loseFailureMatrix) {
-		this.loseFailureMatrix = loseFailureMatrix;
-	}
+	// public double[][] getWinFailureMatrix() {
+	// return winFailureMatrix;
+	// }
+	//
+	// public void setWinFailureMatrix(double[][] winFailureMatrix) {
+	// this.winFailureMatrix = winFailureMatrix;
+	// }
+	//
+	// public double[][] getDrawFailureMatrix() {
+	// return drawFailureMatrix;
+	// }
+	//
+	// public void setDrawFailureMatrix(double[][] drawFailureMatrix) {
+	// this.drawFailureMatrix = drawFailureMatrix;
+	// }
+	//
+	// public double[][] getLoseFailureMatrix() {
+	// return loseFailureMatrix;
+	// }
+	//
+	// public void setLoseFailureMatrix(double[][] loseFailureMatrix) {
+	// this.loseFailureMatrix = loseFailureMatrix;
+	// }
 
 	public int getNumberOfWinPrediction() {
 		return numberOfWinPrediction;
@@ -255,26 +263,26 @@ public class ApplicationErrorAnalysis {
 	}
 
 	public int getNumberOfSuccessWinPredictions() {
-		return numberOfSuccessWinPredictions;
+		return numberOfWinSuccessPredictions;
 	}
 
 	public void setNumberOfSuccessWinPredictions(int numberOfSuccessWinPredictions) {
-		this.numberOfSuccessWinPredictions = numberOfSuccessWinPredictions;
+		this.numberOfWinSuccessPredictions = numberOfSuccessWinPredictions;
 	}
 
 	public int getNumberOfSuccessDrawPredictions() {
-		return numberOfSuccessDrawPredictions;
+		return numberOfDrawSuccessPredictions;
 	}
 
 	public void setNumberOfSuccessDrawPredictions(int numberOfSuccessDrawPredictions) {
-		this.numberOfSuccessDrawPredictions = numberOfSuccessDrawPredictions;
+		this.numberOfDrawSuccessPredictions = numberOfSuccessDrawPredictions;
 	}
 
 	public int getNumberOfSuccessLosePredictions() {
-		return numberOfSuccessLosePredictions;
+		return numberOfLoseSuccessPredictions;
 	}
 
 	public void setNumberOfSuccessLosePredictions(int numberOfSuccessLosePredictions) {
-		this.numberOfSuccessLosePredictions = numberOfSuccessLosePredictions;
+		this.numberOfLoseSuccessPredictions = numberOfSuccessLosePredictions;
 	}
 }
