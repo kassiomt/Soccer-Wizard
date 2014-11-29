@@ -136,6 +136,7 @@ public class SoccerGUI extends javax.swing.JFrame {
         inputRodadas2Final = new javax.swing.JTextField();
         inputTimes2Final = new javax.swing.JTextField();
         botaoLoad = new javax.swing.JButton();
+        botaoLoad1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -489,7 +490,7 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         jLabel27.setText("Limiar de erro:");
 
-        inputRotinas1.setText("15000");
+        inputRotinas1.setText("10000");
 
         inputLearningRate1.setText("0.02");
 
@@ -515,7 +516,7 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         jLabel29.setText("Times:");
 
-        inputTimes1Inicial.setText("18");
+        inputTimes1Inicial.setText("20");
 
         jLabel30.setText("Neurônios:");
 
@@ -539,26 +540,33 @@ public class SoccerGUI extends javax.swing.JFrame {
 
         jLabel33.setText("Times para execução:");
 
-        inputRodadas2Inicial.setText("21");
+        inputRodadas2Inicial.setText("11");
 
-        inputTimes2Inicial.setText("18");
+        inputTimes2Inicial.setText("20");
 
         jLabel34.setText("Intervalo de confiabilidade:");
 
         inputConfidenceInterval2.setText("0.3");
 
-        inputRodadas1Final.setText("29");
+        inputRodadas1Final.setText("31");
 
-        inputTimes1Final.setText("18");
+        inputTimes1Final.setText("20");
 
-        inputRodadas2Final.setText("29");
+        inputRodadas2Final.setText("31");
 
-        inputTimes2Final.setText("18");
+        inputTimes2Final.setText("20");
 
         botaoLoad.setText("CARREGAR CAMPEONATO");
         botaoLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoLoadActionPerformed(evt);
+            }
+        });
+
+        botaoLoad1.setText("CARREGAR CAMPEONATO");
+        botaoLoad1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoLoad1ActionPerformed(evt);
             }
         });
 
@@ -622,7 +630,8 @@ public class SoccerGUI extends javax.swing.JFrame {
                     .addComponent(botaoInicializar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botaoTreinar1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botaoInicializar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botaoLoad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(botaoLoad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoLoad1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         menuPanel2Layout.setVerticalGroup(
@@ -673,12 +682,14 @@ public class SoccerGUI extends javax.swing.JFrame {
                         .addGroup(menuPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(inputConfidenceInterval2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel34))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addComponent(botaoLoad)
-                .addGap(59, 59, 59)
+                .addGap(18, 18, 18)
                 .addComponent(botaoInicializar1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botaoTreinar1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(botaoLoad1)
                 .addGap(18, 18, 18)
                 .addComponent(botaoInicializar2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -778,11 +789,11 @@ public class SoccerGUI extends javax.swing.JFrame {
 			
 			if (retorno == JFileChooser.APPROVE_OPTION) {
 				Workbook workbook = Workbook.getWorkbook(chooser.getSelectedFile());
-				SoccerWizard.teamsMapBuilt = SoccerWizard.buildTeams(workbook);
+				SoccerWizard.trainingTeamsMapBuilt = SoccerWizard.buildTeams(workbook);
 				
-				String mensagem = "Campeonato carregado!";
+				String mensagem = "Campeonato para treinamento carregado!";
 				JOptionPane.showMessageDialog(null, mensagem);
-				System.out.println("CAMPEONATO CARREGADO!\n");
+				System.out.println("CAMPEONATO PARA TREINAMENTO CARREGADO!\n");
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -830,11 +841,13 @@ public class SoccerGUI extends javax.swing.JFrame {
 		BuildErrorChart errorChart = null;
 		
 		try {
-		    errorChart = new BuildErrorChart(SoccerWizard.bias.getMinErrorChartData(),SoccerWizard.bias.getMaxErrorChartData(), SoccerWizard.bias.getAverageErrorChartData());
+			errorChart = new BuildErrorChart(SoccerWizard.bias.getMinErrorChartData(), SoccerWizard.bias.getMaxErrorChartData(),
+					SoccerWizard.bias.getAverageErrorChartData(), SoccerWizard.bias.getInitialMinErrorChartData(),
+					SoccerWizard.bias.getInitialMaxErrorChartData(), SoccerWizard.bias.getInitialAverageErrorChartData());
 		} catch (IOException ex) {
-		    Logger.getLogger(SoccerGUI.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(SoccerGUI.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		
+
 		chartPanel2.removeAll();
 		chartPanel2.add(new ChartPanel(errorChart.chart));
 		chartPanel2.setVisible(false);
@@ -843,6 +856,33 @@ public class SoccerGUI extends javax.swing.JFrame {
 		JOptionPane.showMessageDialog(rootPane, "O treinamento foi concluido. Você pode agora prosseguir com a aplicação da rede!", "TREINAMENTO CONCLUIDO", 1);
     }//GEN-LAST:event_botaoTreinar2ActionPerformed
 
+    private void botaoLoad1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoad1ActionPerformed
+    	try {
+			JFileChooser chooser = new JFileChooser(
+					"C:\\Users\\kassio-chronos\\Desktop\\workspace\\Soccer-Wizard");
+			chooser.setFileFilter(new FileNameExtensionFilter(".xls", "xls"));
+
+			int retorno = chooser.showOpenDialog(null);
+
+			
+			if (retorno == JFileChooser.APPROVE_OPTION) {
+				Workbook workbook = Workbook.getWorkbook(chooser.getSelectedFile());
+				SoccerWizard.applicationTeamsMapBuilt = SoccerWizard.buildTeams(workbook);
+				
+				String mensagem = "Campeonato para aplicação carregado!";
+				JOptionPane.showMessageDialog(null, mensagem);
+				System.out.println("CAMPEONATO PARA APLICAÇÃO CARREGADO!\n");
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("Arquivo não encontrado!");
+		} catch (BiffException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }//GEN-LAST:event_botaoLoad1ActionPerformed
+    
     private void botaoInicializar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoTreinar3ActionPerformed
 		SoccerWizard.setParametersForApplication(
 				Integer.parseInt(inputTimes2Inicial.getText()),
@@ -907,6 +947,7 @@ public class SoccerGUI extends javax.swing.JFrame {
     private javax.swing.JButton botaoInicializar2;
     private javax.swing.JButton botaoInicializarXoR;
     private javax.swing.JButton botaoLoad;
+    private javax.swing.JButton botaoLoad1;
     private javax.swing.JButton botaoRodar1;
     private javax.swing.JButton botaoRodarXoR;
     private javax.swing.JButton botaoTreinar1;

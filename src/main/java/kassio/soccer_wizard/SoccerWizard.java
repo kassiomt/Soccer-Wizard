@@ -24,8 +24,9 @@ public class SoccerWizard {
 	public static BackPropagationAlgorithm bias;
 	public static Initializer dataForApplication;
 
-	public static TeamsMapBuilder teamsMapBuilt;
-    
+	public static TeamsMapBuilder trainingTeamsMapBuilt;
+	public static TeamsMapBuilder applicationTeamsMapBuilt;
+	
 
 	public static void main(String[] args) throws BiffException, IOException {
 		System.out.println("Hello world! Let's get the party started!\n");
@@ -43,7 +44,7 @@ public class SoccerWizard {
 	}
 	
 	public static Initializer initializeDataForTraining() {
-		return dataForTraining = new InitializerForTraining(trainingParameters.getStructure(), teamsMapBuilt.getTeamsMap());
+		return dataForTraining = new InitializerForTraining(trainingParameters.getStructure(), trainingTeamsMapBuilt.getTeamsMap());
 	}
 	
 	public static Parameters setParametersForApplication(int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, double confidenceInterval) {
@@ -51,7 +52,7 @@ public class SoccerWizard {
 	}
 	
 	public static Initializer initializeDataForApplication(){
-		return dataForApplication = new InitializerForApplication(applicationParameters.getStructure(), teamsMapBuilt.getTeamsMap(), dataForTraining.getGamesRandom());
+		return dataForApplication = new InitializerForApplication(applicationParameters.getStructure(), applicationTeamsMapBuilt.getTeamsMap(), dataForTraining.getGamesRandom());
 	}
 	
 	public static BackPropagationAlgorithm backPropagationAlgorithm() {
@@ -67,7 +68,7 @@ public class SoccerWizard {
 	}
 	
 	public static TeamsMapBuilder buildTeams(Workbook workbook){
-		return teamsMapBuilt = new TeamsMapBuilder(workbook);
+		return new TeamsMapBuilder(workbook);
 	}
 	
 

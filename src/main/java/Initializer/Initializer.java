@@ -20,8 +20,8 @@ public abstract class Initializer {
 	public abstract int[] getGamesRandom();
 
 	protected int[] useThisColumnsOfExcelTable() {
-		// int[] colunasSelecionaveis = {16, 17, 19, 21, 23, 25}; //Full Inicial
-		int[] columns = new int[] { 16, 17 }; // teste
+		// int[] colunasSelecionaveis = {16, 17, 19, 21, 23, 25, 32 aprov home/away, 39 GP home/away, 40 , 47 GC home/away, 48}; //Full Inicial
+		int[] columns = new int[] { 32, 39, 47 }; // teste
 		// int[] colunasSelecionaveis = {16, 17}; //Encurtado
 		return columns;
 	}

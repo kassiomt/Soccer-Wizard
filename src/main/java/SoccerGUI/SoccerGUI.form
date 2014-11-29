@@ -876,6 +876,7 @@
                               <Component id="botaoTreinar1" alignment="0" max="32767" attributes="0"/>
                               <Component id="botaoInicializar1" alignment="1" max="32767" attributes="0"/>
                               <Component id="botaoLoad" max="32767" attributes="0"/>
+                              <Component id="botaoLoad1" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -943,12 +944,14 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="84" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="botaoLoad" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="botaoInicializar1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="botaoTreinar1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="68" max="32767" attributes="0"/>
+                          <Component id="botaoLoad1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="botaoInicializar2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -976,7 +979,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputRotinas1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="15000"/>
+                    <Property name="text" type="java.lang.String" value="10000"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="SoccerGUI_inputRotinas"/>
@@ -1025,7 +1028,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputTimes1Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="18"/>
+                    <Property name="text" type="java.lang.String" value="20"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel30">
@@ -1069,12 +1072,12 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputRodadas2Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="21"/>
+                    <Property name="text" type="java.lang.String" value="11"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputTimes2Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="18"/>
+                    <Property name="text" type="java.lang.String" value="20"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel34">
@@ -1089,22 +1092,22 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputRodadas1Final">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="29"/>
+                    <Property name="text" type="java.lang.String" value="31"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputTimes1Final">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="18"/>
+                    <Property name="text" type="java.lang.String" value="20"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputRodadas2Final">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="29"/>
+                    <Property name="text" type="java.lang.String" value="31"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputTimes2Final">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="18"/>
+                    <Property name="text" type="java.lang.String" value="20"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="botaoLoad">
@@ -1113,6 +1116,14 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoLoadActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="botaoLoad1">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="CARREGAR CAMPEONATO"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoLoad1ActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

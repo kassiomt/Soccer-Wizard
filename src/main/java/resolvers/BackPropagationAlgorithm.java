@@ -22,6 +22,9 @@ public class BackPropagationAlgorithm {
 	private XYSeries maxErrorChartData;
 	private XYSeries minErrorChartData;
 	private XYSeries averageErrorChartData;
+	private XYSeries initialMaxErrorChartData;
+	private XYSeries initialMinErrorChartData;
+	private XYSeries initialAverageErrorChartData;
 	private double maxError;
 	private double minError;
 	private double averageError;
@@ -32,14 +35,18 @@ public class BackPropagationAlgorithm {
 
 		trainingIteration(initializedData, modifiers, false);
 
-		initializedData = removeTrashData(initializedData, epochError);
+		initializedData = removeTrashData(initializedData, epochError, 5);
 
 		trainingIteration(initializedData, modifiers, true);
+		
+		initializedData = removeTrashData(initializedData, epochError, 5);
 
+		trainingIteration(initializedData, modifiers, true);
+			
 		try {
 			exportInputAndErrorToCSV(epochError, initializedData.getInputMatrix());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Falha ao exportar dados de entrada e erro para arquivo .CSV");
 			e.printStackTrace();
 		}
 		System.out.format("Treinamento concluido com sucesso após:%n%d rotinas%ne com:%n%f de erro máximo%n%n", rotinas, maxError);
@@ -53,9 +60,16 @@ public class BackPropagationAlgorithm {
 		setOutputBias(BiasInitializator.outputBias(initializedData.getHiddenNeurons(), initializedData.getOutputMatrix()));
 
 		// STEP 1
-		setMaxErrorChartData(new XYSeries("MaxError"));
-		setMinErrorChartData(new XYSeries("MinError"));
-		setAverageErrorChartData(new XYSeries("AverageError"));
+		if (isFinalTraining) {
+			setMaxErrorChartData(new XYSeries("MaxError"));
+			setMinErrorChartData(new XYSeries("MinError"));
+			setAverageErrorChartData(new XYSeries("AverageError"));
+		} else {
+			setInitialMaxErrorChartData(new XYSeries("InitialMaxError"));
+			setInitialMinErrorChartData(new XYSeries("InitialMinError"));
+			setInitialAverageErrorChartData(new XYSeries("InitialAverageError"));
+		}
+
 		setMaxError(1);
 		setMinError(1);
 		setAverageError(1);
@@ -101,10 +115,11 @@ public class BackPropagationAlgorithm {
 			}
 
 			setRotinas(rotinas + 1);
-			if (isFinalTraining) {
-				setErrors();
-				getChartInfo();
-			}
+			setErrors();
+			if (isFinalTraining)
+				getPosCorrectionChartInfo();
+			else
+				getPreCorrectionChartInfo();
 		}
 	}
 
@@ -114,55 +129,55 @@ public class BackPropagationAlgorithm {
 		setAverageError(WeightAndErrorCalculator.getAverageError(epochError));
 	}
 
-	private void getChartInfo() {
+	private void getPosCorrectionChartInfo() {
 		getMaxErrorChartData().add(rotinas, maxError);
 		getMinErrorChartData().add(rotinas, minError);
 		getAverageErrorChartData().add(rotinas, averageError);
 	}
 
-	private Initializer removeTrashData(Initializer initializedData, double[] originalError) {
-		double[][] newInputMatrix = initializedData.getInputMatrix();
-		double[][] newOutputMatrix = initializedData.getOutputMatrix();
-		double[][] newTargetMatrix = initializedData.getTargetMatrix();
-		double[] error = originalError.clone();
+	private void getPreCorrectionChartInfo() {
+		getInitialMaxErrorChartData().add(rotinas, maxError);
+		getInitialMinErrorChartData().add(rotinas, minError);
+		getInitialAverageErrorChartData().add(rotinas, averageError);
+	}
 
-		int numberOfElementsToRemove = (int) Math.round(error.length * 0.05);
+	private Initializer removeTrashData(Initializer initializedData, double[] error, double percentageOfTrashToRemove) {
+		int numberOfElementsToRemove = (int) Math.round(error.length * ( percentageOfTrashToRemove / 100));
+		double[] errorAux = error.clone();
+		Arrays.sort(errorAux);
+
+		int[] indexesToRemove = findOriginalIndexesOfHigherElements(error, errorAux, numberOfElementsToRemove);
+
+		for (int i = indexesToRemove.length - 1; i >= 0; i--) {
+			error = ArrayUtils.remove(error, indexesToRemove[i]);
+			initializedData.setInputMatrix(removeSelectedIndexFromMatrix(initializedData.getInputMatrix(), indexesToRemove[i]));
+			initializedData.setOutputMatrix(removeSelectedIndexFromMatrix(initializedData.getOutputMatrix(), indexesToRemove[i]));
+			initializedData.setTargetMatrix(removeSelectedIndexFromMatrix(initializedData.getTargetMatrix(), indexesToRemove[i]));
+		}
+
+		return initializedData;
+	}
+
+	private double[][] removeSelectedIndexFromMatrix(double[][] matrix, int index) {
+		for (int j = 0; j < matrix.length; j++) {
+			double[] matrixArray = matrix[j];
+			matrixArray = ArrayUtils.remove(matrixArray, index);
+			matrix[j] = matrixArray;
+		}
+		return matrix;
+	}
+
+	private int[] findOriginalIndexesOfHigherElements(double[] error, double[] errorAux, int numberOfElementsToRemove) {
 		int[] indexesToRemove = new int[numberOfElementsToRemove];
-		Arrays.sort(error);
-
 		for (int i = 0; i < numberOfElementsToRemove; i++) {
-			for (int j = 0; j < originalError.length; j++) {
-				if (error[error.length - 1 - i] == originalError[j]) {
+			for (int j = 0; j < error.length; j++) {
+				if (errorAux[errorAux.length - 1 - i] == error[j]) {
 					indexesToRemove[i] = j;
 				}
 			}
 		}
-
 		Arrays.sort(indexesToRemove);
-		for (int i = indexesToRemove.length-1; i >=0; i--) {
-			originalError = ArrayUtils.remove(originalError, indexesToRemove[i]);
-			for (int j = 0; j < newInputMatrix.length; j++) {
-				double[] newInputMatrixArray = newInputMatrix[j];
-				newInputMatrixArray = ArrayUtils.remove(newInputMatrixArray, indexesToRemove[i]);
-				newInputMatrix[j] = newInputMatrixArray;
-			}
-			for (int j = 0; j < newOutputMatrix.length; j++) {
-				double[] newOutputMatrixArray = newOutputMatrix[j];
-				newOutputMatrixArray = ArrayUtils.remove(newOutputMatrixArray, indexesToRemove[i]);
-				newOutputMatrix[j] = newOutputMatrixArray;
-			}
-			for (int j = 0; j < newTargetMatrix.length; j++) {
-				double[] newTargetMatrixArray = newTargetMatrix[j];
-				newTargetMatrixArray = ArrayUtils.remove(newTargetMatrixArray, indexesToRemove[i]);
-				newTargetMatrix[j] = newTargetMatrixArray;
-			}
-		}
-
-		initializedData.setInputMatrix(newInputMatrix);
-		initializedData.setOutputMatrix(newOutputMatrix);
-		initializedData.setTargetMatrix(newTargetMatrix);
-
-		return initializedData;
+		return indexesToRemove;
 	}
 
 	private void exportInputAndErrorToCSV(double[] error, double[][] inputMatrix) throws IOException {
@@ -203,14 +218,6 @@ public class BackPropagationAlgorithm {
 		this.hiddenBias = hiddenBias;
 	}
 
-	public XYSeries getMaxErrorChartData() {
-		return maxErrorChartData;
-	}
-
-	public void setMaxErrorChartData(XYSeries chartData) {
-		this.maxErrorChartData = chartData;
-	}
-
 	public double getMaxError() {
 		return maxError;
 	}
@@ -243,6 +250,14 @@ public class BackPropagationAlgorithm {
 		this.averageError = averageError;
 	}
 
+	public XYSeries getMaxErrorChartData() {
+		return maxErrorChartData;
+	}
+
+	public void setMaxErrorChartData(XYSeries chartData) {
+		this.maxErrorChartData = chartData;
+	}
+
 	public XYSeries getMinErrorChartData() {
 		return minErrorChartData;
 	}
@@ -257,5 +272,29 @@ public class BackPropagationAlgorithm {
 
 	public void setAverageErrorChartData(XYSeries averageErrorChartData) {
 		this.averageErrorChartData = averageErrorChartData;
+	}
+
+	public XYSeries getInitialMaxErrorChartData() {
+		return initialMaxErrorChartData;
+	}
+
+	public void setInitialMaxErrorChartData(XYSeries initialMaxErrorChartData) {
+		this.initialMaxErrorChartData = initialMaxErrorChartData;
+	}
+
+	public XYSeries getInitialMinErrorChartData() {
+		return initialMinErrorChartData;
+	}
+
+	public void setInitialMinErrorChartData(XYSeries initialMinErrorChartData) {
+		this.initialMinErrorChartData = initialMinErrorChartData;
+	}
+
+	public XYSeries getInitialAverageErrorChartData() {
+		return initialAverageErrorChartData;
+	}
+
+	public void setInitialAverageErrorChartData(XYSeries initialAverageErrorChartData) {
+		this.initialAverageErrorChartData = initialAverageErrorChartData;
 	}
 }
