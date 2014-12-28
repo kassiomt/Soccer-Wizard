@@ -21,7 +21,7 @@ public abstract class Initializer {
 
 	protected int[] useThisColumnsOfExcelTable() {
 		// int[] colunasSelecionaveis = {16, 17, 19, 21, 23, 25, 32 aprov home/away, 39 GP home/away, 40 , 47 GC home/away, 48}; //Full Inicial
-		int[] columns = new int[] { 32, 39, 47 }; // teste
+		int[] columns = new int[] { 16 }; // teste
 		// int[] colunasSelecionaveis = {16, 17}; //Encurtado
 		return columns;
 	}
@@ -63,11 +63,10 @@ public abstract class Initializer {
 	}
 
 	protected void setTargetMatrix(int startOfData, int numberOfData, int[] gamesRandom, int[] outputColumns, Map<String, Sheet> mapaDeTimes) {
-		targetMatrix = new double[outputColumns.length * 2][numberOfData];
+		targetMatrix = new double[outputColumns.length][numberOfData];
 
 		for (int i = 0; i < numberOfData; i++) {
 			setTeamDataOnTargetMatrix(i, startOfData, gamesRandom, outputColumns, mapaDeTimes);
-			setEnemyTeamDataOnTargetMatrix(i, startOfData, gamesRandom, outputColumns, mapaDeTimes);
 		}
 	}
 
@@ -75,14 +74,6 @@ public abstract class Initializer {
 		for (int k = 0; k < outputColumns.length; k++) {
 			Cell cell = mapaDeTimes.get("timeRandom").getCell(outputColumns[k], gamesRandom[i + startOfData]);
 			getTargetMatrix()[k][i] = Double.parseDouble(cell.getContents());
-		}
-	}
-
-	private void setEnemyTeamDataOnTargetMatrix(int i, int startOfData, int[] gamesRandom, int[] outputColumns, Map<String, Sheet> mapaDeTimes) {
-		int offset = outputColumns.length;
-		for (int k = offset; k < offset * 2; k++) {
-			Cell enemyCell = mapaDeTimes.get("adversarioRandom").getCell(outputColumns[k - offset], gamesRandom[i + startOfData]);
-			getTargetMatrix()[k][i] = Double.parseDouble(enemyCell.getContents().replace(',', '.'));
 		}
 	}
 

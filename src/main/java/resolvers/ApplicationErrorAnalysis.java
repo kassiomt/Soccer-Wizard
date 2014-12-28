@@ -6,28 +6,22 @@ public class ApplicationErrorAnalysis {
 	private double drawSuccessRatio;
 	private double loseSuccessRatio;
 	private double overallSuccessRatio;
-	// private double[][] winFailureMatrix;
-	// private double[][] drawFailureMatrix;
-	// private double[][] loseFailureMatrix;
 	private int numberOfWinPrediction;
 	private int numberOfDrawPrediction;
 	private int numberOfLosePrediction;
 	private int numberOfWinSuccessPredictions = 0;
 	private int numberOfDrawSuccessPredictions = 0;
 	private int numberOfLoseSuccessPredictions = 0;
-	private int numberOfWinResults;
-	private int numberOfDrawResults;
-	private int numberOfLoseResults;
-	private int bothfalse = 0;
+	private int numberOfWinResults = 0;
+	private int numberOfDrawResults = 0;
+	private int numberOfLoseResults = 0;
 
 	public ApplicationErrorAnalysis(double confidenceInterval, double[][] lastLayerOutMatrix, double[][] target) {
-		// setWinFailureMatrix(new double[target.length][target[0].length]);
-		// setDrawFailureMatrix(new double[target.length][target[0].length]);
-		// setLoseFailureMatrix(new double[target.length][target[0].length]);
-
-		for (int l = 0; l < lastLayerOutMatrix[0].length; l++) {
-			thirdErrorCalculation(lastLayerOutMatrix, target, l);
-		}
+		int[][] predictionMatrix = setPrediction(lastLayerOutMatrix);
+		int[][] validationMatrix = setValidation(predictionMatrix, lastLayerOutMatrix);
+		int[][] correctPredictionsMatrix = setResultsMatrix(predictionMatrix, validationMatrix, target);
+		checkResult(correctPredictionsMatrix, target, validationMatrix);
+		
 
 		setWinSuccessRatio((double) getNumberOfSuccessWinPredictions() / (double) getNumberOfWinPrediction());
 		setDrawSuccessRatio((double) getNumberOfSuccessDrawPredictions() / (double) getNumberOfDrawPrediction());
@@ -36,127 +30,143 @@ public class ApplicationErrorAnalysis {
 				/ (double) (getNumberOfWinPrediction() + getNumberOfDrawPrediction() + getNumberOfLosePrediction()));
 	}
 
-	// public static void errorCalculation(Initializer initializedData, double
-	// confidenceInterval, double[][] target) {
-	// setWinFailureMatrix(new double[target.length][target[0].length]);
-	// setDrawFailureMatrix(new double[target.length][target[0].length]);
-	// setLoseFailureMatrix(new double[target.length][target[0].length]);
-	//
-	// for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
-	// thirdErrorCalculation(target, l);
-	// }
-	//
-	// FeedforwardAlgorithm.setWinSuccessRatio((double)
-	// numberOfSuccessWinPredictions/ (double) numberOfWinPrediction);
-	// FeedforwardAlgorithm.setDrawSuccessRatio((double)
-	// numberOfSuccessDrawPredictions/ (double) numberOfDrawPrediction);
-	// FeedforwardAlgorithm.setLoseSuccessRatio((double)
-	// numberOfSuccessLosePredictions/ (double) numberOfLosePrediction);
-	// FeedforwardAlgorithm.setOverallSuccessRatio((double)
-	// (numberOfSuccessWinPredictions + numberOfSuccessDrawPredictions +
-	// numberOfSuccessLosePredictions)
-	// / (double) (numberOfWinPrediction + numberOfDrawPrediction +
-	// numberOfLosePrediction));
-	// }
-
-	private void thirdErrorCalculation(double[][] lastLayerOut, double[][] target, int l) {
-
-		boolean predictionIsWin = false;
-		boolean predictionIsDraw = false;
-		boolean predictionIsLose = false;
-
-		predictionIsWin = isWinBiggerThanOthers(lastLayerOut, l, predictionIsWin);
-		predictionIsDraw = isDrawBiggerThanOthers(lastLayerOut, l, predictionIsDraw);
-		predictionIsLose = isLoseBiggerThanOthers(lastLayerOut, l, predictionIsLose);
-
-		if (predictionIsWin || predictionIsDraw || predictionIsLose) {
-			bothfalse += bothfalse;
+	private int[][] setPrediction(double[][] lastLayerOut) {
+		int[][] predictionMatrix = new int[lastLayerOut.length][lastLayerOut[0].length];
+		for (int l = 0; l < lastLayerOut[0].length; l++) {
+			
+			if (predictionIsWin(lastLayerOut, l))
+				predictionMatrix[0][l] = 1;
+			else if (predictionIsDraw(lastLayerOut, l))
+				predictionMatrix[1][l] = 1;
+			else if (predictionIsLose(lastLayerOut, l))
+				predictionMatrix[2][l] = 1;
 		}
-		checkWinResult(target, l, predictionIsWin);
-		checkDrawResult(target, l, predictionIsDraw);
-		checkLoseResult(target, l, predictionIsLose);
+		
+		return predictionMatrix;
 	}
-
-	private boolean isWinBiggerThanOthers(double[][] lastLayerOut, int l, boolean predictionIsWin) {
-		if ((lastLayerOut[0][l] > lastLayerOut[1][l] && lastLayerOut[0][l] > lastLayerOut[2][l])
-				&& (lastLayerOut[5][l] > lastLayerOut[3][l] && lastLayerOut[5][l] > lastLayerOut[4][l])) {
+	
+	private boolean predictionIsWin(double[][] lastLayerOut, int l) {
+		if (lastLayerOut[0][l] > lastLayerOut[1][l] && lastLayerOut[0][l] > lastLayerOut[2][l]) {
 			setNumberOfWinPrediction(getNumberOfWinPrediction() + 1);
-			return predictionIsWin = true;
+			return true;
 		}
 		return false;
 	}
-
-	private boolean isDrawBiggerThanOthers(double[][] lastLayerOut, int l, boolean predictionIsDraw) {
-		if ((lastLayerOut[1][l] > lastLayerOut[0][l] && lastLayerOut[1][l] > lastLayerOut[2][l])
-				&& (lastLayerOut[4][l] > lastLayerOut[3][l] && lastLayerOut[4][l] > lastLayerOut[5][l])) {
+	private boolean predictionIsDraw(double[][] lastLayerOut, int l) {
+		if (lastLayerOut[1][l] > lastLayerOut[0][l] && lastLayerOut[1][l] > lastLayerOut[2][l]) {
 			setNumberOfDrawPrediction(getNumberOfDrawPrediction() + 1);
-			return predictionIsDraw = true;
+			return true;
 		}
 		return false;
 	}
-
-	private boolean isLoseBiggerThanOthers(double[][] lastLayerOut, int l, boolean predictionIsLose) {
-		if ((lastLayerOut[2][l] > lastLayerOut[0][l] && lastLayerOut[2][l] > lastLayerOut[1][l])
-				&& (lastLayerOut[3][l] > lastLayerOut[4][l] && lastLayerOut[3][l] > lastLayerOut[5][l])) {
+	private boolean predictionIsLose(double[][] lastLayerOut, int l) {
+		if (lastLayerOut[2][l] > lastLayerOut[0][l] && lastLayerOut[2][l] > lastLayerOut[1][l]) {
 			setNumberOfLosePrediction(getNumberOfLosePrediction() + 1);
-			return predictionIsLose = true;
+			return true;
 		}
 		return false;
 	}
 
-	private void checkWinResult(double[][] target, int l, boolean isWin) {
-		if (target[0][l] == 1) {
-			setNumberOfWinResults(getNumberOfWinResults() + 1);
-			if (isWin)
-				setNumberOfSuccessWinPredictions(getNumberOfSuccessWinPredictions() + 1);
-			// else recordWinFailures(target, l);
+	
+	private int[][] setValidation(int[][] prediction, double[][] lastLayerOut) {
+		int[][] validationMatrix = new int[prediction.length][prediction[0].length];
+		double[] sumOfEpochResults = sumOfEpochResults(lastLayerOut);
+		double[][] probabilities = probabilities(lastLayerOut, sumOfEpochResults);
+		double[] averageOfProbabilities = averageOfProbabilities(probabilities);
+		double[] stdOfProbabilities = stdOfProbabilities(probabilities, averageOfProbabilities);
+		
+		for (int l = 0; l < lastLayerOut[0].length; l++) {
+			for (int i = 0; i < validationMatrix.length; i++) {
+				validationMatrix[i][l] = validateResult(probabilities, averageOfProbabilities, stdOfProbabilities, i, l);
+			}
 		}
+			
+		return validationMatrix;
 	}
 
-	private void checkDrawResult(double[][] target, int l, boolean isDraw) {
-		if (target[1][l] == 1) {
-			setNumberOfDrawResults(getNumberOfDrawResults() + 1);
-			if (isDraw)
-				setNumberOfSuccessDrawPredictions(getNumberOfSuccessDrawPredictions() + 1);
-			// else recordDrawFailures(target, l);
+	private double[] sumOfEpochResults(double[][] lastLayerOut) {
+		double[] sumOfEpochResults = new double[lastLayerOut[0].length];
+		for (int l = 0; l < lastLayerOut[0].length; l++) {
+			sumOfEpochResults[l] = 0;
+			for (int i = 0; i < lastLayerOut.length; i++)
+				sumOfEpochResults[l] += lastLayerOut[i][l];
+			}
+		return sumOfEpochResults;
+	}
+	private double[][] probabilities(double[][] lastLayerOut, double[] sumOfEpochResults) {
+		double[][] probability = new double[lastLayerOut.length][lastLayerOut[0].length];
+		
+		for (int i = 0; i < lastLayerOut.length; i++) {
+			for (int l = 0; l < lastLayerOut[0].length; l++) {
+				probability[i][l] = 1 - (lastLayerOut[i][l] / sumOfEpochResults[l]);
+			}
+		}
+		return probability;
+	}
+	private double[] averageOfProbabilities(double[][] probabilities) {
+		double[] averageOfProbabilities = {0,0,0};
+		for (int i = 0; i < probabilities.length; i++) {
+			for (int l = 0; l < probabilities[0].length; l++) {
+				averageOfProbabilities[i] += probabilities[i][l];
+			}
+			averageOfProbabilities[i] = averageOfProbabilities[i] / probabilities[0].length;
+		}
+		return averageOfProbabilities;
+	}
+	private double[] stdOfProbabilities(double[][] probabilities, double[] averageOfProbabilities) {
+		double[] variance = { 0, 0, 0 };
+		double[] stdOfProbabilities = { 0, 0, 0 };
+
+		for (int i = 0; i < probabilities.length; i++) {
+			for (int l = 0; l < probabilities[0].length; l++) {
+				variance[i] += Math.pow((averageOfProbabilities[i] - probabilities[i][l]), 2);
+			}
+			variance[i] = variance[i] / probabilities[0].length;
+			stdOfProbabilities[i] = Math.sqrt(variance[i]);
+		}
+		return stdOfProbabilities;
+	}
+	private int validateResult(double[][] probabilities, double[] averageOfProbabilities, double[] stdOfProbabilities, int condition, int epoch) {
+
+		if (probabilities[condition][epoch] >= 1 && probabilities[condition][epoch] > (averageOfProbabilities[condition] + stdOfProbabilities[condition])) {
+			return 1;
+		}
+		return 0;
+	}
+	
+	
+	private int[][] setResultsMatrix(int[][] predictionMatrix, int[][] validationMatrix, double[][] target) {
+		int[][] resultsMatrix = new int[target.length][target[0].length];
+		for (int l = 0; l < target[0].length; l++) {
+			for (int i = 0; i < target.length; i++) {
+				if (predictionMatrix[i][l] == 1 && validationMatrix[i][l] == 1 && target[i][l] == 1)
+					resultsMatrix[i][l] = 1;
+			}
+		}
+		
+		return resultsMatrix;
+	}
+	
+	
+	private void checkResult(int[][] correctPredictionsMatrix, double[][] target, int[][] validationMatrix) {
+		for (int l = 0; l < target[0].length; l++) {
+			if (target[0][l] == 1 && validationMatrix[0][l] == 1) {
+				setNumberOfWinResults(getNumberOfWinResults() + 1);
+				if (correctPredictionsMatrix[0][l] == 1)
+					setNumberOfSuccessWinPredictions(getNumberOfSuccessWinPredictions() + 1);
+			}
+			if (target[1][l] == 1 && validationMatrix[1][l] == 1) {
+				setNumberOfDrawResults(getNumberOfDrawResults() + 1);
+				if (correctPredictionsMatrix[1][l] == 1)
+					setNumberOfSuccessDrawPredictions(getNumberOfSuccessDrawPredictions() + 1);
+			}
+			if (target[2][l] == 1 && validationMatrix[2][l] == 1) {
+				setNumberOfLoseResults(getNumberOfLoseResults() + 1);
+				if (correctPredictionsMatrix[2][l] == 1)
+					setNumberOfSuccessLosePredictions(getNumberOfSuccessLosePredictions() + 1);
+			}
 		}
 	}
-
-	private void checkLoseResult(double[][] target, int l, boolean isLose) {
-		if (target[2][l] == 1) {
-			setNumberOfLoseResults(getNumberOfLoseResults() + 1);
-			if (isLose)
-				setNumberOfSuccessLosePredictions(getNumberOfSuccessLosePredictions() + 1);
-			// else recordLoseFailures(target, l);
-		}
-	}
-
-	// private void recordWinFailures(double[][] target, int l) {
-	// getWinFailureMatrix()[0][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[0][l];
-	// getWinFailureMatrix()[1][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[1][l];
-	// getWinFailureMatrix()[2][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[2][l];
-	// }
-	//
-	// private void recordDrawFailures(double[][] target, int l) {
-	// getDrawFailureMatrix()[0][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[0][l];
-	// getDrawFailureMatrix()[1][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[1][l];
-	// getDrawFailureMatrix()[2][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[2][l];
-	// }
-	//
-	// private void recordLoseFailures(double[][] target, int l) {
-	// getLoseFailureMatrix()[0][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[0][l];
-	// getLoseFailureMatrix()[1][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[1][l];
-	// getLoseFailureMatrix()[2][l] =
-	// FeedforwardAlgorithm.getLastLayerOutMatrix()[2][l];
-	// }
 
 	public double getWinSuccessRatio() {
 		return winSuccessRatio;
@@ -189,30 +199,6 @@ public class ApplicationErrorAnalysis {
 	public void setOverallSuccessRatio(double overallSuccessRatio) {
 		this.overallSuccessRatio = overallSuccessRatio;
 	}
-
-	// public double[][] getWinFailureMatrix() {
-	// return winFailureMatrix;
-	// }
-	//
-	// public void setWinFailureMatrix(double[][] winFailureMatrix) {
-	// this.winFailureMatrix = winFailureMatrix;
-	// }
-	//
-	// public double[][] getDrawFailureMatrix() {
-	// return drawFailureMatrix;
-	// }
-	//
-	// public void setDrawFailureMatrix(double[][] drawFailureMatrix) {
-	// this.drawFailureMatrix = drawFailureMatrix;
-	// }
-	//
-	// public double[][] getLoseFailureMatrix() {
-	// return loseFailureMatrix;
-	// }
-	//
-	// public void setLoseFailureMatrix(double[][] loseFailureMatrix) {
-	// this.loseFailureMatrix = loseFailureMatrix;
-	// }
 
 	public int getNumberOfWinPrediction() {
 		return numberOfWinPrediction;

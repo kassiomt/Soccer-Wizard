@@ -16,7 +16,7 @@ public class FeedforwardAlgorithm {
 
 		System.out.println("Começando aplicação");
 		double[][] target = initializedData.getTargetMatrix();
-		lastLayerOutMatrix = new double[initializedData.getOutputColumns().length * 2][initializedData.getInputMatrix()[0].length];
+		lastLayerOutMatrix = new double[initializedData.getOutputColumns().length][initializedData.getInputMatrix()[0].length];
 
 		for (int l = 0; l < initializedData.getInputMatrix()[0].length; l++) {
 			// Feedforward
@@ -35,10 +35,7 @@ public class FeedforwardAlgorithm {
 			getLastLayerOutMatrix()[0][l] = lastLayerOut[0];
 			getLastLayerOutMatrix()[1][l] = lastLayerOut[1];
 			getLastLayerOutMatrix()[2][l] = lastLayerOut[2];
-			getLastLayerOutMatrix()[3][l] = lastLayerOut[3];
-			getLastLayerOutMatrix()[4][l] = lastLayerOut[4];
-			getLastLayerOutMatrix()[5][l] = lastLayerOut[5];
-
+			
 		}
 
 		setErrorAnalysis(new ApplicationErrorAnalysis(confidenceInterval, lastLayerOutMatrix, target));

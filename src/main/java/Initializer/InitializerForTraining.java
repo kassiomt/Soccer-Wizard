@@ -22,7 +22,7 @@ public class InitializerForTraining extends Initializer {
 
 		setHiddenNeurons(new double[parameters.getHiddenNeurons()]);
 
-		setOutputMatrix(new double[getOutputColumns().length * 2][numberOfTrainingData]);
+		setOutputMatrix(new double[getOutputColumns().length][numberOfTrainingData]);
 
 		setTargetMatrix(0, numberOfTrainingData, getGamesRandom(), getOutputColumns(), mapaDeTimes);
 	}
