@@ -12,22 +12,22 @@ public class ApplicationErrorAnalysis {
 	private int numberOfWinSuccessPredictions = 0;
 	private int numberOfDrawSuccessPredictions = 0;
 	private int numberOfLoseSuccessPredictions = 0;
-	private int numberOfWinResults = 0;
-	private int numberOfDrawResults = 0;
-	private int numberOfLoseResults = 0;
+	private int numberOfValidWinResults = 0;
+	private int numberOfValidDrawResults = 0;
+	private int numberOfValidLoseResults = 0;
 
 	public ApplicationErrorAnalysis(double confidenceInterval, double[][] lastLayerOutMatrix, double[][] target) {
 		int[][] predictionMatrix = setPrediction(lastLayerOutMatrix);
 		int[][] validationMatrix = setValidation(predictionMatrix, lastLayerOutMatrix);
-		int[][] correctPredictionsMatrix = setResultsMatrix(predictionMatrix, validationMatrix, target);
-		checkResult(correctPredictionsMatrix, target, validationMatrix);
+//		int[][] correctPredictionsMatrix = setResultsMatrix(predictionMatrix, validationMatrix, target);
+		checkResult(predictionMatrix, target, validationMatrix);
 		
-
-		setWinSuccessRatio((double) getNumberOfSuccessWinPredictions() / (double) getNumberOfWinPrediction());
-		setDrawSuccessRatio((double) getNumberOfSuccessDrawPredictions() / (double) getNumberOfDrawPrediction());
-		setLoseSuccessRatio((double) getNumberOfSuccessLosePredictions() / (double) getNumberOfLosePrediction());
+		System.out.println("Number of Valid Results :" + (getNumberOfValidWinResults() + getNumberOfValidDrawResults() + getNumberOfValidLoseResults()));
+		setWinSuccessRatio((double) getNumberOfSuccessWinPredictions() / (double) getNumberOfValidWinResults());
+		setDrawSuccessRatio((double) getNumberOfSuccessDrawPredictions() / (double) getNumberOfValidDrawResults());
+		setLoseSuccessRatio((double) getNumberOfSuccessLosePredictions() / (double) getNumberOfValidLoseResults());
 		setOverallSuccessRatio((double) (getNumberOfSuccessWinPredictions() + getNumberOfSuccessDrawPredictions() + getNumberOfSuccessLosePredictions())
-				/ (double) (getNumberOfWinPrediction() + getNumberOfDrawPrediction() + getNumberOfLosePrediction()));
+				/ (double) (getNumberOfValidWinResults() + getNumberOfValidDrawResults() + getNumberOfValidLoseResults()));
 	}
 
 	private int[][] setPrediction(double[][] lastLayerOut) {
@@ -41,7 +41,7 @@ public class ApplicationErrorAnalysis {
 			else if (predictionIsLose(lastLayerOut, l))
 				predictionMatrix[2][l] = 1;
 		}
-		
+
 		return predictionMatrix;
 	}
 	
@@ -128,41 +128,40 @@ public class ApplicationErrorAnalysis {
 	}
 	private int validateResult(double[][] probabilities, double[] averageOfProbabilities, double[] stdOfProbabilities, int condition, int epoch) {
 
-		if (probabilities[condition][epoch] >= 1 && probabilities[condition][epoch] > (averageOfProbabilities[condition] + stdOfProbabilities[condition])) {
+		if (probabilities[condition][epoch] >= .65 && probabilities[condition][epoch] > (averageOfProbabilities[condition] - 0.5 * stdOfProbabilities[condition])) {
 			return 1;
 		}
 		return 0;
 	}
 	
 	
-	private int[][] setResultsMatrix(int[][] predictionMatrix, int[][] validationMatrix, double[][] target) {
-		int[][] resultsMatrix = new int[target.length][target[0].length];
-		for (int l = 0; l < target[0].length; l++) {
-			for (int i = 0; i < target.length; i++) {
-				if (predictionMatrix[i][l] == 1 && validationMatrix[i][l] == 1 && target[i][l] == 1)
-					resultsMatrix[i][l] = 1;
-			}
-		}
-		
-		return resultsMatrix;
-	}
+//	private int[][] setResultsMatrix(int[][] predictionMatrix, int[][] validationMatrix, double[][] target) {
+//		int[][] resultsMatrix = new int[target.length][target[0].length];
+//		for (int l = 0; l < target[0].length; l++) {
+//			for (int i = 0; i < target.length; i++) {
+//				if (predictionMatrix[i][l] == 1 && validationMatrix[i][l] == 1 && target[i][l] == 1)
+//					resultsMatrix[i][l] = 1;
+//			}
+//		}
+//		
+//		return resultsMatrix;
+//	}
 	
-	
-	private void checkResult(int[][] correctPredictionsMatrix, double[][] target, int[][] validationMatrix) {
+	private void checkResult(int[][] predictionsMatrix, double[][] target, int[][] validationMatrix) {
 		for (int l = 0; l < target[0].length; l++) {
 			if (target[0][l] == 1 && validationMatrix[0][l] == 1) {
-				setNumberOfWinResults(getNumberOfWinResults() + 1);
-				if (correctPredictionsMatrix[0][l] == 1)
+				setNumberOfValidWinResults(getNumberOfValidWinResults() + 1);
+				if (predictionsMatrix[0][l] == 1)
 					setNumberOfSuccessWinPredictions(getNumberOfSuccessWinPredictions() + 1);
 			}
 			if (target[1][l] == 1 && validationMatrix[1][l] == 1) {
-				setNumberOfDrawResults(getNumberOfDrawResults() + 1);
-				if (correctPredictionsMatrix[1][l] == 1)
+				setNumberOfValidDrawResults(getNumberOfValidDrawResults() + 1);
+				if (predictionsMatrix[1][l] == 1)
 					setNumberOfSuccessDrawPredictions(getNumberOfSuccessDrawPredictions() + 1);
 			}
 			if (target[2][l] == 1 && validationMatrix[2][l] == 1) {
-				setNumberOfLoseResults(getNumberOfLoseResults() + 1);
-				if (correctPredictionsMatrix[2][l] == 1)
+				setNumberOfValidLoseResults(getNumberOfValidLoseResults() + 1);
+				if (predictionsMatrix[2][l] == 1)
 					setNumberOfSuccessLosePredictions(getNumberOfSuccessLosePredictions() + 1);
 			}
 		}
@@ -224,28 +223,28 @@ public class ApplicationErrorAnalysis {
 		this.numberOfLosePrediction = numberOfLosePrediction;
 	}
 
-	public int getNumberOfWinResults() {
-		return numberOfWinResults;
+	public int getNumberOfValidWinResults() {
+		return numberOfValidWinResults;
 	}
 
-	public void setNumberOfWinResults(int numberOfWinResults) {
-		this.numberOfWinResults = numberOfWinResults;
+	public void setNumberOfValidWinResults(int numberOfValidWinResults) {
+		this.numberOfValidWinResults = numberOfValidWinResults;
 	}
 
-	public int getNumberOfDrawResults() {
-		return numberOfDrawResults;
+	public int getNumberOfValidDrawResults() {
+		return numberOfValidDrawResults;
 	}
 
-	public void setNumberOfDrawResults(int numberOfDrawResults) {
-		this.numberOfDrawResults = numberOfDrawResults;
+	public void setNumberOfValidDrawResults(int numberOfValidDrawResults) {
+		this.numberOfValidDrawResults = numberOfValidDrawResults;
 	}
 
-	public int getNumberOfLoseResults() {
-		return numberOfLoseResults;
+	public int getNumberOfValidLoseResults() {
+		return numberOfValidLoseResults;
 	}
 
-	public void setNumberOfLoseResults(int numberOfLoseResults) {
-		this.numberOfLoseResults = numberOfLoseResults;
+	public void setNumberOfValidLoseResults(int numberOfLoseResults) {
+		this.numberOfValidLoseResults = numberOfLoseResults;
 	}
 
 	public int getNumberOfSuccessWinPredictions() {
