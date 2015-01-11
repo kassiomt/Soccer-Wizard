@@ -1,19 +1,21 @@
 package kassio.soccer_wizard;
 
+import initializer.Initializer;
+import initializer.InitializerForApplication;
+import initializer.InitializerForTraining;
+import initializer.XoRInitializer;
+
 import java.io.IOException;
 
+import parameters.Parameters;
+import parameters.ParametersForApplication;
+import parameters.ParametersForTraining;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
 import resolvers.BackPropagationAlgorithm;
 import resolvers.FeedforwardAlgorithm;
-import Initializer.Initializer;
-import Initializer.InitializerForApplication;
-import Initializer.InitializerForTraining;
-import Initializer.XoRInitializer;
-import Parameters.Parameters;
-import Parameters.ParametersForApplication;
-import Parameters.ParametersForTraining;
 import SoccerGUI.SoccerGUI;
+import SoccerGUI.TeamsMapBuilder;
 
 
 public class SoccerWizard {

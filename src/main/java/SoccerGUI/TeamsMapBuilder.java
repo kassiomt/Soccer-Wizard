@@ -1,4 +1,4 @@
-package kassio.soccer_wizard;
+package SoccerGUI;
 
 import java.util.HashMap;
 

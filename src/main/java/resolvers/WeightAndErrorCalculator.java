@@ -1,4 +1,4 @@
-package calculators;
+package resolvers;
 
 import java.util.Arrays;
 

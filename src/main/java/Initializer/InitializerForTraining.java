@@ -1,12 +1,12 @@
-package Initializer;
+package initializer;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import parameters.ParametersForTraining;
 import jxl.Sheet;
-import Parameters.ParametersForTraining;
 
 public class InitializerForTraining extends Initializer {
 

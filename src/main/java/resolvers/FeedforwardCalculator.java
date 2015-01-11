@@ -1,4 +1,4 @@
-package calculators;
+package resolvers;
 
 public class FeedforwardCalculator {
 	public static double[] receivesInputSignal(double inputMatrix[][], int l) {
@@ -10,7 +10,7 @@ public class FeedforwardCalculator {
 		return inputUnits;
 	}
 
-	public static double[] weightedInputSignal(double[] inputUnit,	double[][] bias) {
+	public static double[] weightedInputSignal(double[] inputUnit, double[][] bias) {
 		double[] netInput = new double[bias[0].length];
 
 		for (int j = 0; j < bias[0].length; j++) {

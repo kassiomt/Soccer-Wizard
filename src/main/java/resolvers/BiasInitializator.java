@@ -1,4 +1,4 @@
-package calculators;
+package resolvers;
 
 public class BiasInitializator {
 

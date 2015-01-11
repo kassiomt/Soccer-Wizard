@@ -1,11 +1,10 @@
 package resolvers;
 
+import initializer.Initializer;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import Initializer.Initializer;
-import calculators.FeedforwardCalculator;
 
 public class FeedforwardAlgorithm {
 
@@ -35,7 +34,7 @@ public class FeedforwardAlgorithm {
 			getLastLayerOutMatrix()[0][l] = lastLayerOut[0];
 			getLastLayerOutMatrix()[1][l] = lastLayerOut[1];
 			getLastLayerOutMatrix()[2][l] = lastLayerOut[2];
-			
+
 		}
 
 		setErrorAnalysis(new ApplicationErrorAnalysis(confidenceInterval, lastLayerOutMatrix, target));
@@ -57,7 +56,7 @@ public class FeedforwardAlgorithm {
 			bw.append("OutMatrix" + neuronCounter + ",");
 			for (double result : neuron) {
 				bw.append(Double.toString(result));
-				bw.append(",");				
+				bw.append(",");
 			}
 			bw.newLine();
 		}
@@ -67,12 +66,12 @@ public class FeedforwardAlgorithm {
 			bw.append("TargetMatrix" + neuronCounter + ",");
 			for (double result : neuron) {
 				bw.append(Double.toString(result));
-				bw.append(",");				
+				bw.append(",");
 			}
 			bw.newLine();
 		}
-		
-		bw.close();		
+
+		bw.close();
 	}
 
 	public FeedforwardAlgorithm(BackPropagationAlgorithm bias) {

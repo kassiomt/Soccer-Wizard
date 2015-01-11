@@ -1,5 +1,7 @@
 package resolvers;
 
+import initializer.Initializer;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,12 +10,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jfree.data.xy.XYSeries;
 
-import Initializer.Initializer;
-import Parameters.ParametersForTraining;
-import calculators.BackpropagationCalculator;
-import calculators.BiasInitializator;
-import calculators.FeedforwardCalculator;
-import calculators.WeightAndErrorCalculator;
+import parameters.ParametersForTraining;
 
 public class BackPropagationAlgorithm {
 

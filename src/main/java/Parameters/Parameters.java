@@ -1,4 +1,4 @@
-package Parameters;
+package parameters;
 
 public abstract class Parameters {
 

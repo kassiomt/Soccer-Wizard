@@ -1,8 +1,8 @@
-package Initializer;
+package initializer;
 
 import java.util.Map;
 
-import Parameters.ParametersForApplication;
+import parameters.ParametersForApplication;
 import jxl.Sheet;
 
 public class InitializerForApplication extends Initializer {

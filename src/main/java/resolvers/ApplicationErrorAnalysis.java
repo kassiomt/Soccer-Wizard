@@ -19,10 +19,15 @@ public class ApplicationErrorAnalysis {
 	public ApplicationErrorAnalysis(double confidenceInterval, double[][] lastLayerOutMatrix, double[][] target) {
 		int[][] predictionMatrix = setPrediction(lastLayerOutMatrix);
 		int[][] validationMatrix = setValidation(predictionMatrix, lastLayerOutMatrix);
-//		int[][] correctPredictionsMatrix = setResultsMatrix(predictionMatrix, validationMatrix, target);
+		// int[][] correctPredictionsMatrix = setResultsMatrix(predictionMatrix,
+		// validationMatrix, target);
 		checkResult(predictionMatrix, target, validationMatrix);
-		
-		System.out.println("Number of Valid Results :" + (getNumberOfValidWinResults() + getNumberOfValidDrawResults() + getNumberOfValidLoseResults()));
+
+		System.out.println("Number of Valid Results :"
+				+ (getNumberOfValidWinResults() + getNumberOfValidDrawResults() + getNumberOfValidLoseResults()));
+		System.out.format("Percentage of Valid Results :" + "%.2f" + "%%%n",
+				(double) (getNumberOfValidWinResults() + getNumberOfValidDrawResults() + getNumberOfValidLoseResults()) * 100
+						/ (double) lastLayerOutMatrix[0].length);
 		setWinSuccessRatio((double) getNumberOfSuccessWinPredictions() / (double) getNumberOfValidWinResults());
 		setDrawSuccessRatio((double) getNumberOfSuccessDrawPredictions() / (double) getNumberOfValidDrawResults());
 		setLoseSuccessRatio((double) getNumberOfSuccessLosePredictions() / (double) getNumberOfValidLoseResults());
@@ -33,7 +38,7 @@ public class ApplicationErrorAnalysis {
 	private int[][] setPrediction(double[][] lastLayerOut) {
 		int[][] predictionMatrix = new int[lastLayerOut.length][lastLayerOut[0].length];
 		for (int l = 0; l < lastLayerOut[0].length; l++) {
-			
+
 			if (predictionIsWin(lastLayerOut, l))
 				predictionMatrix[0][l] = 1;
 			else if (predictionIsDraw(lastLayerOut, l))
@@ -44,7 +49,7 @@ public class ApplicationErrorAnalysis {
 
 		return predictionMatrix;
 	}
-	
+
 	private boolean predictionIsWin(double[][] lastLayerOut, int l) {
 		if (lastLayerOut[0][l] > lastLayerOut[1][l] && lastLayerOut[0][l] > lastLayerOut[2][l]) {
 			setNumberOfWinPrediction(getNumberOfWinPrediction() + 1);
@@ -52,6 +57,7 @@ public class ApplicationErrorAnalysis {
 		}
 		return false;
 	}
+
 	private boolean predictionIsDraw(double[][] lastLayerOut, int l) {
 		if (lastLayerOut[1][l] > lastLayerOut[0][l] && lastLayerOut[1][l] > lastLayerOut[2][l]) {
 			setNumberOfDrawPrediction(getNumberOfDrawPrediction() + 1);
@@ -59,6 +65,7 @@ public class ApplicationErrorAnalysis {
 		}
 		return false;
 	}
+
 	private boolean predictionIsLose(double[][] lastLayerOut, int l) {
 		if (lastLayerOut[2][l] > lastLayerOut[0][l] && lastLayerOut[2][l] > lastLayerOut[1][l]) {
 			setNumberOfLosePrediction(getNumberOfLosePrediction() + 1);
@@ -67,20 +74,19 @@ public class ApplicationErrorAnalysis {
 		return false;
 	}
 
-	
 	private int[][] setValidation(int[][] prediction, double[][] lastLayerOut) {
 		int[][] validationMatrix = new int[prediction.length][prediction[0].length];
 		double[] sumOfEpochResults = sumOfEpochResults(lastLayerOut);
 		double[][] probabilities = probabilities(lastLayerOut, sumOfEpochResults);
 		double[] averageOfProbabilities = averageOfProbabilities(probabilities);
 		double[] stdOfProbabilities = stdOfProbabilities(probabilities, averageOfProbabilities);
-		
+
 		for (int l = 0; l < lastLayerOut[0].length; l++) {
 			for (int i = 0; i < validationMatrix.length; i++) {
 				validationMatrix[i][l] = validateResult(probabilities, averageOfProbabilities, stdOfProbabilities, i, l);
 			}
 		}
-			
+
 		return validationMatrix;
 	}
 
@@ -90,12 +96,13 @@ public class ApplicationErrorAnalysis {
 			sumOfEpochResults[l] = 0;
 			for (int i = 0; i < lastLayerOut.length; i++)
 				sumOfEpochResults[l] += lastLayerOut[i][l];
-			}
+		}
 		return sumOfEpochResults;
 	}
+
 	private double[][] probabilities(double[][] lastLayerOut, double[] sumOfEpochResults) {
 		double[][] probability = new double[lastLayerOut.length][lastLayerOut[0].length];
-		
+
 		for (int i = 0; i < lastLayerOut.length; i++) {
 			for (int l = 0; l < lastLayerOut[0].length; l++) {
 				probability[i][l] = 1 - (lastLayerOut[i][l] / sumOfEpochResults[l]);
@@ -103,8 +110,9 @@ public class ApplicationErrorAnalysis {
 		}
 		return probability;
 	}
+
 	private double[] averageOfProbabilities(double[][] probabilities) {
-		double[] averageOfProbabilities = {0,0,0};
+		double[] averageOfProbabilities = { 0, 0, 0 };
 		for (int i = 0; i < probabilities.length; i++) {
 			for (int l = 0; l < probabilities[0].length; l++) {
 				averageOfProbabilities[i] += probabilities[i][l];
@@ -113,6 +121,7 @@ public class ApplicationErrorAnalysis {
 		}
 		return averageOfProbabilities;
 	}
+
 	private double[] stdOfProbabilities(double[][] probabilities, double[] averageOfProbabilities) {
 		double[] variance = { 0, 0, 0 };
 		double[] stdOfProbabilities = { 0, 0, 0 };
@@ -126,27 +135,16 @@ public class ApplicationErrorAnalysis {
 		}
 		return stdOfProbabilities;
 	}
+
 	private int validateResult(double[][] probabilities, double[] averageOfProbabilities, double[] stdOfProbabilities, int condition, int epoch) {
 
-		if (probabilities[condition][epoch] >= .65 && probabilities[condition][epoch] > (averageOfProbabilities[condition] - 0.5 * stdOfProbabilities[condition])) {
+		if (probabilities[condition][epoch] >= .5
+				&& probabilities[condition][epoch] > (averageOfProbabilities[condition] - 0 * stdOfProbabilities[condition])) {
 			return 1;
 		}
 		return 0;
 	}
-	
-	
-//	private int[][] setResultsMatrix(int[][] predictionMatrix, int[][] validationMatrix, double[][] target) {
-//		int[][] resultsMatrix = new int[target.length][target[0].length];
-//		for (int l = 0; l < target[0].length; l++) {
-//			for (int i = 0; i < target.length; i++) {
-//				if (predictionMatrix[i][l] == 1 && validationMatrix[i][l] == 1 && target[i][l] == 1)
-//					resultsMatrix[i][l] = 1;
-//			}
-//		}
-//		
-//		return resultsMatrix;
-//	}
-	
+
 	private void checkResult(int[][] predictionsMatrix, double[][] target, int[][] validationMatrix) {
 		for (int l = 0; l < target[0].length; l++) {
 			if (target[0][l] == 1 && validationMatrix[0][l] == 1) {

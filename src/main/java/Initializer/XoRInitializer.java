@@ -1,4 +1,4 @@
-package Initializer;
+package initializer;
 
 public class XoRInitializer extends Initializer {
 	
