@@ -49,8 +49,8 @@ public class SoccerWizard {
 		return dataForTraining = new InitializerForTraining(trainingParameters.getStructure(), trainingTeamsMapBuilt.getTeamsMap());
 	}
 	
-	public static Parameters setParametersForApplication(int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, double confidenceInterval) {
-		return applicationParameters = new ParametersForApplication(numTeams, numTeamsTotal, numRodadas, numRodadasTotal, confidenceInterval);
+	public static Parameters setParametersForApplication(int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, double probabilityThreshold, double stdThreshold) {
+		return applicationParameters = new ParametersForApplication(numTeams, numTeamsTotal, numRodadas, numRodadasTotal, probabilityThreshold, stdThreshold);
 	}
 	
 	public static Initializer initializeDataForApplication(){
@@ -66,7 +66,7 @@ public class SoccerWizard {
 	}
 	
 	public static FeedforwardAlgorithm feedforwardAlgorithm() {
-		return new FeedforwardAlgorithm(dataForApplication, bias, applicationParameters.getModifiers().getConfidenceInterval());
+		return new FeedforwardAlgorithm(dataForApplication, bias, applicationParameters.getModifiers());
 	}
 	
 	public static TeamsMapBuilder buildTeams(Workbook workbook){

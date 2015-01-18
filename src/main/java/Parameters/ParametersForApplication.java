@@ -2,16 +2,19 @@ package parameters;
 
 public class ParametersForApplication extends Parameters {
 
-	private double confidenceInterval;
+	private double probabilityThreshold;
+	private double stdThreshold;
 	private Structure structure;
 	private Modifiers modifiers;
 
-	public ParametersForApplication(int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, double confidenceInterval) {
+	public ParametersForApplication(int numTeams, int numTeamsTotal, int numRodadas, int numRodadasTotal, double probabilityThreshold,
+			double stdThreshold) {
 		this.numTeams = numTeams;
 		this.numTeamsTotal = numTeamsTotal;
 		this.numRodadas = numRodadas;
 		this.numRodadasTotal = numRodadasTotal;
-		this.confidenceInterval = confidenceInterval;
+		this.probabilityThreshold = probabilityThreshold;
+		this.stdThreshold = stdThreshold;
 		this.structure = new Structure();
 		this.modifiers = new Modifiers();
 	}
@@ -36,14 +39,13 @@ public class ParametersForApplication extends Parameters {
 	}
 
 	public class Modifiers {
-		public double getConfidenceInterval() {
-			return confidenceInterval;
+		public double getProbabilityThreshold() {
+			return probabilityThreshold;
 		}
 
-	}
-
-	public double getConfidenceInterval() {
-		return confidenceInterval;
+		public double getStdThreshold() {
+			return stdThreshold;
+		}
 	}
 
 	public Structure getStructure() {

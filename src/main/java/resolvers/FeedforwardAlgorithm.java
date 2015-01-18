@@ -6,12 +6,14 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import parameters.ParametersForApplication.Modifiers;
+
 public class FeedforwardAlgorithm {
 
 	private double[][] lastLayerOutMatrix;
 	private ApplicationErrorAnalysis errorAnalysis;
 
-	public FeedforwardAlgorithm(Initializer initializedData, BackPropagationAlgorithm bias, double confidenceInterval) {
+	public FeedforwardAlgorithm(Initializer initializedData, BackPropagationAlgorithm bias, Modifiers modifiers) {
 
 		System.out.println("Começando aplicação");
 		double[][] target = initializedData.getTargetMatrix();
@@ -37,7 +39,7 @@ public class FeedforwardAlgorithm {
 
 		}
 
-		setErrorAnalysis(new ApplicationErrorAnalysis(confidenceInterval, lastLayerOutMatrix, target));
+		setErrorAnalysis(new ApplicationErrorAnalysis(lastLayerOutMatrix, target, modifiers.getProbabilityThreshold(), modifiers.getStdThreshold()));
 		try {
 			exportResultsToCSV(lastLayerOutMatrix, target);
 		} catch (IOException e) {

@@ -16,11 +16,10 @@ public class ApplicationErrorAnalysis {
 	private int numberOfValidDrawResults = 0;
 	private int numberOfValidLoseResults = 0;
 
-	public ApplicationErrorAnalysis(double confidenceInterval, double[][] lastLayerOutMatrix, double[][] target) {
+	public ApplicationErrorAnalysis(double[][] lastLayerOutMatrix, double[][] target, double probabilityThreshold, double stdThreshold) {
 		int[][] predictionMatrix = setPrediction(lastLayerOutMatrix);
-		int[][] validationMatrix = setValidation(predictionMatrix, lastLayerOutMatrix);
-		// int[][] correctPredictionsMatrix = setResultsMatrix(predictionMatrix,
-		// validationMatrix, target);
+		boolean[][] validationMatrix = setValidation(predictionMatrix, lastLayerOutMatrix, probabilityThreshold, stdThreshold);
+
 		checkResult(predictionMatrix, target, validationMatrix);
 
 		System.out.println("Number of Valid Results :"
@@ -74,8 +73,8 @@ public class ApplicationErrorAnalysis {
 		return false;
 	}
 
-	private int[][] setValidation(int[][] prediction, double[][] lastLayerOut) {
-		int[][] validationMatrix = new int[prediction.length][prediction[0].length];
+	private boolean[][] setValidation(int[][] prediction, double[][] lastLayerOut, double probabilityThreshold, double stdThreshold) {
+		boolean[][] validationMatrix = new boolean[prediction.length][prediction[0].length];
 		double[] sumOfEpochResults = sumOfEpochResults(lastLayerOut);
 		double[][] probabilities = probabilities(lastLayerOut, sumOfEpochResults);
 		double[] averageOfProbabilities = averageOfProbabilities(probabilities);
@@ -83,7 +82,7 @@ public class ApplicationErrorAnalysis {
 
 		for (int l = 0; l < lastLayerOut[0].length; l++) {
 			for (int i = 0; i < validationMatrix.length; i++) {
-				validationMatrix[i][l] = validateResult(probabilities, averageOfProbabilities, stdOfProbabilities, i, l);
+				validationMatrix[i][l] = validateResult(probabilities, averageOfProbabilities, stdOfProbabilities, probabilityThreshold, stdThreshold, i, l);
 			}
 		}
 
@@ -95,7 +94,7 @@ public class ApplicationErrorAnalysis {
 		for (int l = 0; l < lastLayerOut[0].length; l++) {
 			sumOfEpochResults[l] = 0;
 			for (int i = 0; i < lastLayerOut.length; i++)
-				sumOfEpochResults[l] += lastLayerOut[i][l];
+				sumOfEpochResults[l] += 1 + lastLayerOut[i][l];
 		}
 		return sumOfEpochResults;
 	}
@@ -105,7 +104,7 @@ public class ApplicationErrorAnalysis {
 
 		for (int i = 0; i < lastLayerOut.length; i++) {
 			for (int l = 0; l < lastLayerOut[0].length; l++) {
-				probability[i][l] = 1 - (lastLayerOut[i][l] / sumOfEpochResults[l]);
+				probability[i][l] = (1 + lastLayerOut[i][l]) / sumOfEpochResults[l];
 			}
 		}
 		return probability;
@@ -136,28 +135,28 @@ public class ApplicationErrorAnalysis {
 		return stdOfProbabilities;
 	}
 
-	private int validateResult(double[][] probabilities, double[] averageOfProbabilities, double[] stdOfProbabilities, int condition, int epoch) {
+	private boolean validateResult(double[][] probabilities, double[] averageOfProbabilities, double[] stdOfProbabilities, double probabilityThreshold, double stdThreshold, int condition, int epoch) {
 
-		if (probabilities[condition][epoch] >= .5
-				&& probabilities[condition][epoch] > (averageOfProbabilities[condition] - 0 * stdOfProbabilities[condition])) {
-			return 1;
+		if (probabilities[condition][epoch] >= probabilityThreshold
+				&& probabilities[condition][epoch] >= (averageOfProbabilities[condition] + stdThreshold * stdOfProbabilities[condition])) {
+			return true;
 		}
-		return 0;
+		return false;
 	}
 
-	private void checkResult(int[][] predictionsMatrix, double[][] target, int[][] validationMatrix) {
+	private void checkResult(int[][] predictionsMatrix, double[][] target, boolean[][] validationMatrix) {
 		for (int l = 0; l < target[0].length; l++) {
-			if (target[0][l] == 1 && validationMatrix[0][l] == 1) {
+			if (target[0][l] == 1 && validationMatrix[0][l]) {
 				setNumberOfValidWinResults(getNumberOfValidWinResults() + 1);
 				if (predictionsMatrix[0][l] == 1)
 					setNumberOfSuccessWinPredictions(getNumberOfSuccessWinPredictions() + 1);
 			}
-			if (target[1][l] == 1 && validationMatrix[1][l] == 1) {
+			if (target[1][l] == 1 && validationMatrix[1][l]) {
 				setNumberOfValidDrawResults(getNumberOfValidDrawResults() + 1);
 				if (predictionsMatrix[1][l] == 1)
 					setNumberOfSuccessDrawPredictions(getNumberOfSuccessDrawPredictions() + 1);
 			}
-			if (target[2][l] == 1 && validationMatrix[2][l] == 1) {
+			if (target[2][l] == 1 && validationMatrix[2][l]) {
 				setNumberOfValidLoseResults(getNumberOfValidLoseResults() + 1);
 				if (predictionsMatrix[2][l] == 1)
 					setNumberOfSuccessLosePredictions(getNumberOfSuccessLosePredictions() + 1);

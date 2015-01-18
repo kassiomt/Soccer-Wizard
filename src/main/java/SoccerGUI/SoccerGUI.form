@@ -455,11 +455,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="menuPanel2" min="-2" pref="311" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="menuPanel2" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="resultPanel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="chartPanel2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="resultPanel2" max="32767" attributes="0"/>
+                          <Component id="chartPanel2" alignment="1" min="-2" pref="914" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -526,7 +526,7 @@
                                   <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   <Component id="jScrollPane14" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                                  <EmptySpace pref="59" max="32767" attributes="0"/>
                                   <Component id="jLabel21" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jScrollPane19" min="-2" pref="132" max="-2" attributes="0"/>
@@ -805,27 +805,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="inputTimes2Inicial" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Component id="inputConfidenceInterval2" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Component id="inputRodadas2Inicial" min="-2" pref="60" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
@@ -856,17 +835,40 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="inputRodadas1Final" max="32767" attributes="0"/>
+                                      <Component id="inputRodadas1Final" pref="69" max="32767" attributes="0"/>
                                       <Component id="inputTimes1Final" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jLabel32" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel34" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel37" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="inputTimes2Inicial" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Component id="inputThresholdOfProbability" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Component id="inputRodadas2Inicial" min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Component id="inputStdOfProbability" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="inputTimes2Final" min="-2" pref="60" max="-2" attributes="0"/>
                               <Component id="inputRodadas2Final" alignment="0" min="-2" pref="60" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="13" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
@@ -921,9 +923,9 @@
                               <Component id="jLabel30" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="inputHiddenNeurons1" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="inputRodadas2Inicial" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -931,7 +933,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="inputTimes2Inicial" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -939,18 +941,22 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="inputConfidenceInterval2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="inputThresholdOfProbability" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="inputStdOfProbability" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel37" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="55" max="32767" attributes="0"/>
                           <Component id="botaoLoad" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="botaoInicializar1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="botaoTreinar1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="68" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                           <Component id="botaoLoad1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="botaoInicializar2" min="-2" max="-2" attributes="0"/>
@@ -987,7 +993,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputLearningRate1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="0.02"/>
+                    <Property name="text" type="java.lang.String" value="0.01"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputErro1">
@@ -1018,7 +1024,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputRodadas1Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="20"/>
+                    <Property name="text" type="java.lang.String" value="31"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel29">
@@ -1038,7 +1044,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputHiddenNeurons1">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="2"/>
+                    <Property name="text" type="java.lang.String" value="40"/>
                   </Properties>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="SoccerGUI_inputHiddenNeurons"/>
@@ -1072,7 +1078,7 @@
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputRodadas2Inicial">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="11"/>
+                    <Property name="text" type="java.lang.String" value="31"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputTimes2Inicial">
@@ -1082,12 +1088,12 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel34">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Intervalo de confiabilidade:"/>
+                    <Property name="text" type="java.lang.String" value="Limiar de probabilidade:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="inputConfidenceInterval2">
+                <Component class="javax.swing.JTextField" name="inputThresholdOfProbability">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="0.3"/>
+                    <Property name="text" type="java.lang.String" value="0.25"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="inputRodadas1Final">
@@ -1124,6 +1130,19 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoLoad1ActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel37">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Std de probabilidade:"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="inputStdOfProbability">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="-0.5"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inputStdOfProbabilityActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
