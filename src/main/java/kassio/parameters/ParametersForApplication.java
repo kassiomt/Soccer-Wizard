@@ -1,4 +1,4 @@
-package parameters;
+package kassio.parameters;
 
 public class ParametersForApplication extends Parameters {
 

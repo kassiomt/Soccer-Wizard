@@ -1,4 +1,4 @@
-package initializer;
+package kassio.initializer;
 
 public class XoRInitializer extends Initializer {
 	

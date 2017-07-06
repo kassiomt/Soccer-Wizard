@@ -1,4 +1,4 @@
-package initializer;
+package kassio.initializer;
 
 import java.util.Map;
 

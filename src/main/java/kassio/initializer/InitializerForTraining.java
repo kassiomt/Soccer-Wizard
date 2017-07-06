@@ -1,11 +1,11 @@
-package initializer;
+package kassio.initializer;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import parameters.ParametersForTraining;
+import kassio.parameters.ParametersForTraining;
 import jxl.Sheet;
 
 public class InitializerForTraining extends Initializer {

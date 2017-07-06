@@ -1,4 +1,4 @@
-package parameters;
+package kassio.parameters;
 
 public abstract class Parameters {
 

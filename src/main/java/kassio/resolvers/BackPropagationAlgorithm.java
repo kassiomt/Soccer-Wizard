@@ -1,6 +1,6 @@
-package resolvers;
+package kassio.resolvers;
 
-import initializer.Initializer;
+import kassio.initializer.Initializer;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jfree.data.xy.XYSeries;
 
-import parameters.ParametersForTraining;
+import kassio.parameters.ParametersForTraining;
 
 public class BackPropagationAlgorithm {
 

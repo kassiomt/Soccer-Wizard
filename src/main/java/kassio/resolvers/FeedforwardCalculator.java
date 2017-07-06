@@ -1,4 +1,4 @@
-package resolvers;
+package kassio.resolvers;
 
 public class FeedforwardCalculator {
 	public static double[] receivesInputSignal(double inputMatrix[][], int l) {

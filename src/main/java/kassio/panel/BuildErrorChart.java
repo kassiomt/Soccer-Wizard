@@ -1,4 +1,4 @@
-package SoccerGUI;
+package kassio.panel;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

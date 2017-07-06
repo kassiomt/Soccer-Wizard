@@ -1,8 +1,8 @@
-package initializer;
+package kassio.initializer;
 
 import java.util.Map;
 
-import parameters.ParametersForApplication;
+import kassio.parameters.ParametersForApplication;
 import jxl.Sheet;
 
 public class InitializerForApplication extends Initializer {

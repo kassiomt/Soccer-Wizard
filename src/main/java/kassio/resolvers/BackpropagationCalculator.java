@@ -1,4 +1,4 @@
-package resolvers;
+package kassio.resolvers;
 
 public class BackpropagationCalculator {
 	public static double[] bipolarSigmoidDerivative(double[] layerOutput) {

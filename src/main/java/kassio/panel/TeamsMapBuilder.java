@@ -1,9 +1,9 @@
-package SoccerGUI;
-
-import java.util.HashMap;
+package kassio.panel;
 
 import jxl.Sheet;
 import jxl.Workbook;
+
+import java.util.HashMap;
 
 public class TeamsMapBuilder {
 

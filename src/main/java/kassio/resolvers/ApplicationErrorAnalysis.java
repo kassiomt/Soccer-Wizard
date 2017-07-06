@@ -1,4 +1,4 @@
-package resolvers;
+package kassio.resolvers;
 
 public class ApplicationErrorAnalysis {
 

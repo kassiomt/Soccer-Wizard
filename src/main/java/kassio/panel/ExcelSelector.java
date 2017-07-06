@@ -1,4 +1,4 @@
-package SoccerGUI;
+package kassio.panel;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package resolvers;
+package kassio.resolvers;
 
 import java.util.Arrays;
 

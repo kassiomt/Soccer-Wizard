@@ -1,12 +1,11 @@
-package resolvers;
+package kassio.resolvers;
 
-import initializer.Initializer;
+import kassio.initializer.Initializer;
+import kassio.parameters.ParametersForApplication.Modifiers;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import parameters.ParametersForApplication.Modifiers;
 
 public class FeedforwardAlgorithm {
 
