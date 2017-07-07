@@ -28,11 +28,4 @@ public class SoccerWizard {
  
 		new SoccerWizardGUI().setVisible(true);
 	}
-	
-
-
-
-
-	
-
 }
