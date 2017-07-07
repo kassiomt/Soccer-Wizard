@@ -2,6 +2,7 @@ package kassio.controller;
 
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
+import kassio.GlobalData;
 import kassio.initializer.Initializer;
 import kassio.initializer.InitializerForApplication;
 import kassio.initializer.InitializerForTraining;
@@ -9,21 +10,19 @@ import kassio.panel.TeamsMapBuilder;
 import kassio.parameters.Parameters;
 import kassio.parameters.ParametersForApplication;
 import kassio.resolvers.FeedforwardAlgorithm;
+import kassio.service.InitializeService;
+import kassio.service.TrainingService;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.logging.Logger;
 
-import static kassio.SoccerWizard.*;
+import static kassio.GlobalData.*;
 
-public class SoccerWizardController {
-
-    private static Logger logger;
-
-    SoccerWizardController() {
-    }
+public class SoccerWizardController implements Serializable {
 
     public static void buttonLoadTrainingActionPerformed() {
         try {
@@ -63,7 +62,7 @@ public class SoccerWizardController {
                                                                String inputEndRoundTraining,
                                                                String inputHiddenNeurons) {
 
-        XoRController.setParametersForTraining(
+        InitializeService.setParametersForTraining(
                 Double.parseDouble(inputLearningRate),
                 Integer.parseInt(inputMaxRoutine),
                 Double.parseDouble(inputErrorThreshold),
@@ -87,7 +86,7 @@ public class SoccerWizardController {
         }
 
     public static void buttonTrainActionPerformed() {
-        XoRController.backPropagationAlgorithm();
+        TrainingService.backPropagationAlgorithm();
         logger.info("REDE TREINADA\n");
     }
 
@@ -155,7 +154,4 @@ public class SoccerWizardController {
         private static FeedforwardAlgorithm feedforwardAlgorithm() {
             return new FeedforwardAlgorithm(dataForApplication, bias, applicationParameters.getModifiers());
         }
-
-
-
 }

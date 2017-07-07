@@ -1,6 +1,6 @@
 package kassio.panel;
 
-import kassio.SoccerWizard;
+import kassio.GlobalData;
 import kassio.controller.SoccerWizardController;
 import kassio.controller.XoRController;
 import kassio.resolvers.FeedforwardAlgorithm;
@@ -784,14 +784,14 @@ public class SoccerWizardGUI extends javax.swing.JFrame {
 
         //set texts
         DecimalFormat df = new DecimalFormat(PATTERN);
-        jTextPane1.setText( String.valueOf(df.format(SoccerWizard.bias.getMaxError())) );
-        jTextPane3.setText( String.valueOf(SoccerWizard.bias.getRotinas()));
+        jTextPane1.setText( String.valueOf(df.format(GlobalData.bias.getMaxError())) );
+        jTextPane3.setText( String.valueOf(GlobalData.bias.getRotinas()));
 
         //buildChart
         BuildErrorChart errorChart;
         chartPanel.removeAll();
         try {
-            errorChart = new BuildErrorChart(SoccerWizard.bias.getMaxErrorChartData());
+            errorChart = new BuildErrorChart(GlobalData.bias.getMaxErrorChartData());
 
             chartPanel.add(new ChartPanel(errorChart.chart));
             chartPanel.setVisible(false);
@@ -814,18 +814,18 @@ public class SoccerWizardGUI extends javax.swing.JFrame {
     private void setTextsAndBuildChartSoccerWizard() {
         //set texts
 		DecimalFormat df = new DecimalFormat(PATTERN);
-		jTextPaneErroMinimoFinal.setText( String.valueOf(df.format(SoccerWizard.bias.getMinError())));
-		jTextPaneErroMaximoFinal.setText( String.valueOf(df.format(SoccerWizard.bias.getMaxError())));
-		jTextPaneErroFinal2.setText( String.valueOf(df.format(SoccerWizard.bias.getAverageError())));
-		jTextPaneRotinas.setText( String.valueOf(SoccerWizard.bias.getRotinas()));
+		jTextPaneErroMinimoFinal.setText( String.valueOf(df.format(GlobalData.bias.getMinError())));
+		jTextPaneErroMaximoFinal.setText( String.valueOf(df.format(GlobalData.bias.getMaxError())));
+		jTextPaneErroFinal2.setText( String.valueOf(df.format(GlobalData.bias.getAverageError())));
+		jTextPaneRotinas.setText( String.valueOf(GlobalData.bias.getRotinas()));
 
         //build chart
 		BuildErrorChart errorChart;
         chartPanel2.removeAll();
 		try {
-			errorChart = new BuildErrorChart(SoccerWizard.bias.getMinErrorChartData(), SoccerWizard.bias.getMaxErrorChartData(),
-					SoccerWizard.bias.getAverageErrorChartData(), SoccerWizard.bias.getInitialMinErrorChartData(),
-					SoccerWizard.bias.getInitialMaxErrorChartData(), SoccerWizard.bias.getInitialAverageErrorChartData());
+			errorChart = new BuildErrorChart(GlobalData.bias.getMinErrorChartData(), GlobalData.bias.getMaxErrorChartData(),
+					GlobalData.bias.getAverageErrorChartData(), GlobalData.bias.getInitialMinErrorChartData(),
+					GlobalData.bias.getInitialMaxErrorChartData(), GlobalData.bias.getInitialAverageErrorChartData());
 
             chartPanel2.add(new ChartPanel(errorChart.chart));
             chartPanel2.setVisible(false);
